@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@300&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Encode+Sans+Condensed:wght@300&family=Open+Sans&display=swap');
 /***
     The new CSS reset - version 1.6.0 (last updated 29.4.2022)
     GitHub page: https://github.com/elad2412/the-new-css-reset
@@ -84,7 +84,7 @@ body,
 * {
   padding: 0;
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arimo', sans-serif;
   color: var(--gray-004);
   // direction: rtl;
 }
