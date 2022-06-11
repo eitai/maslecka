@@ -2,6 +2,10 @@ import React from 'react';
 import Style from './homePage.module.scss';
 import Navbar from '../../components/navbar/Navbar';
 import { AiFillPlayCircle } from 'react-icons/ai';
+import { BsGraphUp } from 'react-icons/bs';
+import { SiFampay } from 'react-icons/si';
+import { FaCommentDollar } from 'react-icons/fa';
+import Footer from '../../components/footer/Footer';
 const HomePage = () => {
   return (
     <div>
@@ -33,17 +37,45 @@ const HomePage = () => {
           למדו <span className={Style.how}> איך:</span>
         </span>
       </div>
-      <div className={Style.boxes}>
-        <div className={Style.box}>
-          <AiFillPlayCircle />
+      <div className={`container`}>
+        <div className={Style.boxes}>
+          {/* box 1 */}
+          <div className={Style.box}>
+            <BsGraphUp className={Style.icon} />
+            <h3 className={Style.learn_title}>להתנהל נכון</h3>
+            <p className={Style.learn_text}>
+              עם הכלים שיש לנו באתר תוכלו להתנהל בצורה נכונה ולצאת מהמינוס
+            </p>
+          </div>
+          {/* box 2 */}
+          <div className={Style.box}>
+            <SiFampay className={Style.icon} />
+            <h3 className={Style.learn_title}>לצאת מהמינוס</h3>
+            <p className={Style.learn_text}>
+              עם הכלים שיש לנו באתר תוכלו להתנהל בצורה נכונה ולצאת מהמינוס
+            </p>
+          </div>
+          {/* box 3 */}
+          <div className={Style.box}>
+            <FaCommentDollar className={Style.icon} />
+            <h3 className={Style.learn_title}>להתנהל נכון</h3>
+            <p className={Style.learn_text}>
+              עם הכלים שיש לנו באתר תוכלו להתנהל בצורה נכונה ולצאת מהמינוס
+            </p>
+          </div>
         </div>
-        <div className={Style.box}>
-          <AiFillPlayCircle />
-        </div>
-        <div className={Style.box}>
-          <AiFillPlayCircle />
+        <div className={Style.services}>
+          <button className={`${Style.service} ${Style.service_1}`}>
+            <div className={Style.service_text}>לחצו</div>
+            <span className={Style.service_text}> כדי לחסוך בביטוחים</span>
+          </button>
+          <button className={`${Style.service} ${Style.service_2}`}>
+            <div className={Style.service_text}>לחצו</div>
+            <span className={Style.service_text}>לייעוץ פנסיוני</span>
+          </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
