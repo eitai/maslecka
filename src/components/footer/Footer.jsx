@@ -17,13 +17,21 @@ const Footer = () => {
       <div className={Style.line}>
         <span className={Style.text}>התחבר אלינו ברשתות החברתיות :</span>
         <div className={Style.icons}>
-          <FaFacebook />
-          <FaFacebookMessenger />
-          <FaWhatsapp />
-          <FaInstagram />
+          <button>
+            <FaFacebook />
+          </button>
+          <button>
+            <FaFacebookMessenger />
+          </button>
+          <button>
+            <FaWhatsapp />
+          </button>
+          <button>
+            <FaInstagram />
+          </button>
         </div>
       </div>
-      <div className={Style.footer_details}>
+      <div className={`${Style.footer_details}`}>
         <img
           src={require('../../assets/logo.png')}
           alt='logo'
@@ -55,7 +63,7 @@ const Footer = () => {
               <FaPhoneAlt className={Style.icon_footer} />
               0549308299
             </button>
-            <button className={`${Style.btn_small} `}>
+            <button className={`${Style.btn_small}`}>
               <FaFax className={Style.icon_footer} />
               0549308299
             </button>

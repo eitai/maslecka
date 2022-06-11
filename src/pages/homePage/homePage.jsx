@@ -1,10 +1,9 @@
 import React from 'react';
 import Style from './homePage.module.scss';
 import Navbar from '../../components/navbar/Navbar';
-import { AiFillPlayCircle } from 'react-icons/ai';
 import { BsGraphUp } from 'react-icons/bs';
 import { SiFampay } from 'react-icons/si';
-import { FaCommentDollar } from 'react-icons/fa';
+import { FaCommentDollar, FaPlayCircle } from 'react-icons/fa';
 import Footer from '../../components/footer/Footer';
 const HomePage = () => {
   return (
@@ -16,10 +15,10 @@ const HomePage = () => {
           <p className={Style.subtitle}>מקצצים בעלויות מכפילים</p>
           <p className={Style.subtitle}>את החסכונות</p>
         </div>
+
         <div className={Style.btn_container}>
-          <span className={Style.whitebg}></span>
           <button className={Style.btn_test}>
-            <AiFillPlayCircle />
+            <FaPlayCircle />
             להדגמה
           </button>
           <button className={Style.btn_reg}>הרשם עכשיו</button>
@@ -63,6 +62,11 @@ const HomePage = () => {
               עם הכלים שיש לנו באתר תוכלו להתנהל בצורה נכונה ולצאת מהמינוס
             </p>
           </div>
+        </div>
+        <div className={Style.services_title_container}>
+          <span className={Style.services_subtitle}> ? </span>
+          <span className={Style.services_title}> רוצים לחסוך </span>
+          <span className={Style.services_subtitle}> כבר עכשיו </span>
         </div>
         <div className={Style.services}>
           <button className={`${Style.service} ${Style.service_1}`}>
