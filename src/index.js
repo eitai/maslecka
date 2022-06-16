@@ -25,11 +25,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       {' '}
-      <Provider store={store}>
-        <CacheProvider value={cacheRtl}>
+      <CacheProvider value={cacheRtl}>
+        <Provider store={store}>
           <App />
-        </CacheProvider>{' '}
-      </Provider>
+        </Provider>
+      </CacheProvider>{' '}
     </BrowserRouter>
   </React.StrictMode>
 );

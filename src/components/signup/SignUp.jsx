@@ -7,13 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  setActiveUser,
-  setUserLogOutState,
-  selectUserEmail,
-  selectUserName,
-  login,
-} from '../../store/userSlice';
+import { setActiveUser, login } from '../../store/userSlice';
 import {
   auth,
   createUserWithEmailAndPassword,

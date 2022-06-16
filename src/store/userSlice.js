@@ -19,12 +19,10 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.user = '';
       state.isLoggedIn = false;
-    },
-    setUserLogOutState: (state, action) => {
       state.userName = '';
       state.userEmail = '';
-      state.isLoggedIn = false;
     },
+
     setActiveUser: (state, action) => {
       state.userName = action.payload.userName;
       state.userEmail = action.payload.userEmail;
@@ -33,8 +31,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout, setActiveUser, setUserLogOutState } =
-  userSlice.actions;
+export const { login, logout, setActiveUser } = userSlice.actions;
 
 // selectors
 export const selectUser = (state) => state.user.user;

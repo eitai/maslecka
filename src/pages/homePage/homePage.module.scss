@@ -178,13 +178,67 @@
   width: 25%;
   height: 6rem;
   border-radius: 10px;
-
+  z-index: 999;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.2);
-  transition: all 0.2s;
+}
+
+.btn_tomaslecka {
+  background: var(--orangeColor);
+  width: 20rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: (--box-shadow-soft);
+  transition: all 0.3s;
+  z-index: 2;
   &:hover {
-    // transform: ;
+    transform: scale(1.05) translateY(1px);
+  }
+  &:active {
+    transform: scale(1) translateY(-2px);
+  }
+}
+
+.btn_maslecka_container {
+  &::after {
+    position: absolute;
+    content: '';
+    left: 65px;
+    z-index: 1;
+    top: -8px;
+    width: 22rem;
+    height: 6rem;
+    transform: scale(0.9) translateZ(0);
+    filter: blur(15px);
+    background: linear-gradient(
+      to left,
+      #ff5770,
+      #e4428d,
+      #c42da8,
+      #9e16c3,
+      #6501de,
+      #9e16c3,
+      #c42da8,
+      #e4428d,
+      #ff5770
+    );
+    background-size: 200% 200%;
+    animation: animateGlow 1.25s linear infinite;
+  }
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
   }
 }

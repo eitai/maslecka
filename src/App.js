@@ -1,20 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import HomePage from './pages/homePage/homePage';
-import { Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/dashboard/Dashboard';
+// import RequireAuth from './components/requireAuth/RequireAuth';
+import { Routes, Route, Navigate } from 'react-router-dom';
 // import '@coreui/coreui/dist/css/coreui.min.css';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  login,
-  logout,
-  setIsLoggedIn,
-  setUserLogOutState,
-} from './store/userSlice';
+import { login, logout } from './store/userSlice';
+
 import { auth, onAuthStateChanged, signOutUser } from './firebase';
 
+const RequireAuth = ({ children }) => {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  // console.log(isLoggedIn, 'require');
+
+  if (!isLoggedIn) {
+    return <Navigate to='/' />;
+  }
+
+  return children;
+};
+
 const App = () => {
-  // const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const isLoggedIn = auth.currentUser;
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -31,7 +42,6 @@ const App = () => {
       } else {
         dispatch(logout());
         signOutUser();
-        dispatch(setUserLogOutState());
       }
     });
   }, []);
@@ -40,8 +50,15 @@ const App = () => {
     <>
       <Routes>
         <Route index element={<HomePage />} />
-        {/* <Route path='dashboard' element={<Dashboard />} />
-            <Routes path='customer' element={<Customer />} /> */}
+
+        <Route
+          path='dashboard'
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </>
   );

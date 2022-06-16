@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link, Navigate } from 'react-router-dom';
 
 const boxStyle = {
   position: 'absolute',
@@ -41,7 +42,6 @@ const HomePage = () => {
       setIsSignIn(!isSignedIn);
     }
   };
-  console.log(openForm);
 
   useEffect(() => {
     if (openForm) {
@@ -52,7 +52,6 @@ const HomePage = () => {
   }, [openForm]);
 
   const handleCloseForm = (e) => {
-    e.preventDefault();
     setOpenForm(false);
   };
 
@@ -71,8 +70,17 @@ const HomePage = () => {
   };
 
   const AfterLoggedInBtn = () => {
-    return <div className={Style.btn_container}></div>;
+    return (
+      <div
+        className={` ${Style.btn_maslecka_container} ${Style.btn_container}`}
+      >
+        <Link className={Style.btn_tomaslecka} to='/dashboard'>
+          מעבר למסלקה{' '}
+        </Link>
+      </div>
+    );
   };
+
   return (
     <>
       <div>
