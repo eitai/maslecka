@@ -9,7 +9,7 @@ import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
-
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './styles/css-reset.scss';
 import './styles/global-variables.scss';

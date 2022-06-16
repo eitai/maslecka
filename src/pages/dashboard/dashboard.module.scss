@@ -1,0 +1,13 @@
+.main_container {
+  display: grid;
+  grid-template-columns: 1fr 27%;
+  padding: 0.5rem;
+}
+.category_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+}
+.graph_container {
+  border: 1px solid rgb(208, 11, 11);
+}
