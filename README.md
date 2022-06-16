@@ -8,6 +8,8 @@ In the project directory, you can run:
 
 ### `npm start`
 
+yarn add stylis-plugin-rtl react-hook-form yup @hookform/resolvers/ yup @emotion/react @emotion/cache
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
