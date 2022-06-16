@@ -3,9 +3,29 @@
   height: 20rem;
   width: 27rem;
   overflow-y: scroll;
-  padding: 0.5rem;
+  margin-top: 2rem;
   border-radius: 10px;
+  &:nth-child(even) {
+    .title {
+      background-color: var(--orangeColor);
+    }
+  }
+  &:nth-child(odd) {
+    .title {
+      background-color: var(--purpleColor);
+    }
+  }
 }
 
+.table_container {
+  padding: 0.5rem;
+}
 .title {
+  width: 100%;
+  height: 2rem;
+  color: #fff;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
 }

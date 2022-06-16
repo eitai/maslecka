@@ -11,6 +11,9 @@ const Dashboard = () => {
           <Category />
           <Category />
           <Category />
+          <Category />
+          <Category />
+          <Category />
         </div>
         <div className={Style.graph_container}>
           <div>graph 1</div>

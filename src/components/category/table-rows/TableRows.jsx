@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-
+import Style from './tableRow.module.scss';
 const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
   return rowsData.map((data, index) => {
     const { fullName, emailAddress, salary } = data;
@@ -18,7 +18,11 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
             name='fullName'
             className='form-control'
           /> */}
-          <Select defaultValue={dropdownData[0]} options={dropdownData} />
+          <Select
+            defaultValue={dropdownData[0]}
+            options={dropdownData}
+            className={`${Style.dropdown}`}
+          />
         </td>
         <td>
           <input

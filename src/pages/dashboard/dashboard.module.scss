@@ -6,6 +6,8 @@
 .category_container {
   display: flex;
   justify-content: space-between;
+
+  flex-wrap: wrap;
   padding: 2rem 1rem;
 }
 .graph_container {

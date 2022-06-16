@@ -30,7 +30,7 @@ const Category = () => {
       <div className={Style.title}>
         <span>דיור</span>
       </div>
-      <div className='col-sm-12'>
+      <div className={`col-sm-12 ${Style.table_container}`}>
         <table className='table'>
           <thead>
             <tr>
@@ -47,6 +47,7 @@ const Category = () => {
               </th>
             </tr>
           </thead>
+
           <tbody>
             <TableRows
               rowsData={rowsData}
@@ -56,7 +57,6 @@ const Category = () => {
           </tbody>
         </table>
       </div>
-      <div className='col-sm-4'></div>
     </div>
   );
 };
