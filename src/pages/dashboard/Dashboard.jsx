@@ -1,7 +1,11 @@
 import React from 'react';
-
+import Navbar from '../../components/navbar/Navbar';
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <Navbar isBackgroundColorOn={true} />
+    </div>
+  );
 };
 
 export default Dashboard;

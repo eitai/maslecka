@@ -5,6 +5,9 @@
   height: 5rem;
   border-bottom: 1px solid #f5f5f5;
 }
+.background {
+  background: var(--bg-primary);
+}
 
 .logo {
   height: 4rem;
@@ -17,7 +20,14 @@
   align-items: center;
   color: #fff;
   font-size: 1.5rem;
-  flex-direction: row-reverse;
+  a {
+    padding: 25px 0;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.05);
+      padding: 24px 0;
+    }
+  }
 }
 
 .btn {

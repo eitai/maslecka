@@ -1,19 +1,31 @@
 import React from 'react';
 import Style from './navbar.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { signOutUser } from '../../firebase';
 
-const Navbar = ({ handleSignup }) => {
+const Navbar = ({ handleSignup, isBackgroundColorOn }) => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const handleLogout = () => {
     signOutUser();
   };
 
+  const handleStyleEffects = (event) => {
+    const navLinkList = document.querySelectorAll(`.navbar_bt`);
+
+    for (const link of navLinkList) {
+      link.classList.remove('navbar_bt');
+    }
+    event.target.classList.add('navbar_bt');
+  };
   return (
-    <div className={Style.container}>
+    <div
+      className={`${isBackgroundColorOn && Style.background} ${
+        Style.container
+      }`}
+    >
       {isLoggedIn ? (
         <button className={Style.btn} onClick={handleLogout}>
           התנתק
@@ -25,20 +37,31 @@ const Navbar = ({ handleSignup }) => {
       )}
 
       <div className={Style.links}>
-        <Link to='/'> דף הבית</Link>
-        <Link to='/about-us'>אודות</Link>
-        <Link to='/articles'>כתבות</Link>
-        <Link to='save-now'>חסכו עכשיו</Link>
-        <Link to='contact'>צור קשר</Link>
+        <NavLink to='/' onClick={handleStyleEffects}>
+          {' '}
+          דף הבית
+        </NavLink>
+        <NavLink to='/about-us' onClick={handleStyleEffects}>
+          אודות
+        </NavLink>
+        <NavLink to='/articles' onClick={handleStyleEffects}>
+          כתבות
+        </NavLink>
+        <NavLink to='save-now' onClick={handleStyleEffects}>
+          חסכו עכשיו
+        </NavLink>
+        <NavLink to='contact' onClick={handleStyleEffects}>
+          צור קשר
+        </NavLink>
       </div>
 
-      <Link to='/'>
+      <NavLink to='/'>
         <img
           src={require('../../assets/logo.png')}
           alt='logo'
           className={Style.logo}
         />
-      </Link>
+      </NavLink>
     </div>
   );
 };
