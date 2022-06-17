@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import Style from './tableRow.module.scss';
+
+const customStyles = {
+  option: (provided, state) => ({
+    background: '#fff',
+    cursor: 'pointer',
+    color: '#000',
+  }),
+};
+
 const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
   return rowsData.map((data, index) => {
-    const { fullName, emailAddress, salary } = data;
+    const { expense, kind, amount } = data;
+
     const dropdownData = [
-      { value: 'קבוע', label: 'קבוע' },
-      { value: 'משתנה', label: 'משתנה' },
+      { value: 'expense', label: 'קבוע' },
+      { value: 'expense', label: 'משתנה' },
     ];
     return (
       <tr key={index}>
@@ -15,31 +25,35 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
             type='text'
             value={fullName}
             onChange={(event) => handleChange(index, event)}
-            name='fullName'
+             name='expense'
             className='form-control'
           /> */}
           <Select
             defaultValue={dropdownData[0]}
             options={dropdownData}
             className={`${Style.dropdown}`}
+            onChange={(value) => handleChange(index, value)}
+            name='expense'
+            styles={customStyles}
           />
         </td>
         <td>
           <input
             type='text'
-            value={emailAddress}
+            value={kind}
             onChange={(evnt) => handleChange(index, evnt)}
-            name='emailAddress'
+            name='kind'
             className='form-control'
           />{' '}
         </td>
         <td>
           <input
             type='text'
-            value={salary}
+            value={amount}
             onChange={(evnt) => handleChange(index, evnt)}
-            name='salary'
+            name='amount'
             className='form-control'
+            placeholder='סכום בשקלים'
           />{' '}
         </td>
         <td>

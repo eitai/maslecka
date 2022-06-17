@@ -1,20 +1,24 @@
 .category_box {
   box-shadow: var(--box-shadow-soft);
   height: 20rem;
-  width: 27rem;
+  width: 45%;
   overflow-y: scroll;
   margin-top: 2rem;
   border-radius: 10px;
-  &:nth-child(even) {
-    .title {
-      background-color: var(--orangeColor);
-    }
+  .title {
+    background-color: rgb(18, 138, 112);
   }
-  &:nth-child(odd) {
-    .title {
-      background-color: var(--purpleColor);
-    }
-  }
+
+  // &:nth-child(2n) {
+  //   .title {
+  //     background-color: var(--orangeColor);
+  //   }
+  // }
+  // &:nth-child(odd) {
+  //   .title {
+  //     background-color: var(--purpleColor);
+  //   }
+  // }
 }
 
 .table_container {

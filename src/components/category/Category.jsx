@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
 
-const Category = () => {
-  const [rowsData, setRowsData] = useState([]);
-
+const Category = ({ handleChange, rowsData, setRowsData }) => {
   const addTableRows = () => {
     const rowsInput = {
-      fullName: '',
-      emailAddress: '',
-      salary: '',
+      expense: '',
+      kind: '',
+      amount: '',
     };
     setRowsData([...rowsData, rowsInput]);
   };
@@ -19,12 +17,6 @@ const Category = () => {
     setRowsData(rows);
   };
 
-  const handleChange = (index, evnt) => {
-    const { name, value } = evnt.target;
-    const rowsInput = [...rowsData];
-    rowsInput[index][name] = value;
-    setRowsData(rowsInput);
-  };
   return (
     <div className={`${Style.category_box}`}>
       <div className={Style.title}>
@@ -32,7 +24,7 @@ const Category = () => {
       </div>
       <div className={`col-sm-12 ${Style.table_container}`}>
         <table className='table'>
-          <thead>
+          <thead className={Style.thead}>
             <tr>
               <th>הוצאה</th>
               <th>סוג הוצאה</th>
