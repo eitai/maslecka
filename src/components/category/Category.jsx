@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
 
-const Category = ({ data, test, handleRemoveTable, index }) => {
+const Category = ({ data, handleRemoveTable, index }) => {
   const [rowsData, setRowsData] = useState([]);
   console.log(rowsData, 'rowsData');
-  console.log(test, 'test');
+
+  // const test = useMemo(() => {
+  //   setRowsData(data.rows);
+  // }, [data.rows]);
 
   useEffect(() => {
     setRowsData(data.rows);
@@ -25,8 +28,6 @@ const Category = ({ data, test, handleRemoveTable, index }) => {
     setRowsData(rows);
   };
 
-  console.log(rowsData);
-
   const handleChange = (index, event) => {
     if (event?.target?.name) {
       const { name, value } = event.target;
@@ -40,6 +41,7 @@ const Category = ({ data, test, handleRemoveTable, index }) => {
       setRowsData(rowsInput);
     }
   };
+
   return (
     <div className={`${Style.category_box}`}>
       <div className={Style.title}>
@@ -77,4 +79,4 @@ const Category = ({ data, test, handleRemoveTable, index }) => {
   );
 };
 
-export default Category;
+export default React.memo(Category);

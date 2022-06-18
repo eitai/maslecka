@@ -2,7 +2,7 @@
   box-shadow: var(--box-shadow-soft);
   height: 20rem;
   width: 45%;
-
+  display: inline-block;
   margin-top: 2rem;
   border-radius: 10px;
   .title {
@@ -12,17 +12,6 @@
     display: flex;
     justify-content: space-between;
   }
-
-  // &:nth-child(2n) {
-  //   .title {
-  //     background-color: var(--orangeColor);
-  //   }
-  // }
-  // &:nth-child(odd) {
-  //   .title {
-  //     background-color: var(--purpleColor);
-  //   }
-  // }
 }
 
 .table_container {

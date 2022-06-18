@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import Select from 'react-select';
 import Style from './tableRow.module.scss';
 

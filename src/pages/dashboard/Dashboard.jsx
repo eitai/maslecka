@@ -1,60 +1,82 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Category from '../../components/category/Category';
 import Style from './dashboard.module.scss';
 import { UserMock } from './userMock';
 import AddTable from '../../components/category/add-table/AddTable';
+import BarsChart from '../../components/charts/bars-chart/BarsChart';
+import DonatChat from '../../components/charts/donut-chart/DonutChart';
+import { v4 as uuid } from 'uuid';
+
 const Dashboard = () => {
-  console.log(UserMock, 'usermockData');
   const [tables, setTables] = useState([]);
-  const [isAddTable, setIsAddTable] = useState(false);
+  const [openAddTableModal, setOpenAddTableModal] = useState(false);
 
   const handleRemoveTable = (event, index) => {
-    const { name, value } = event.target;
-
     const tempTable = [...tables];
     tempTable.splice(index, 1);
     setTables(tempTable);
   };
 
-  const handleAddTable = (e) => {
-    e.preventDefault();
-    setIsAddTable(true);
+  const handleAddTable = (e, sectionName) => {
+    const newTables = [...tables];
+    newTables.push({
+      id: uuid(),
+      title: sectionName,
+      rows: [{ expense: '', kind: '', amount: '' }],
+    });
+    setTables(newTables);
+    setOpenAddTableModal(false);
   };
 
   useEffect(() => {
-    setTables(UserMock.sections);
+    setTables(
+      UserMock.sections.map((table) => ({
+        ...table,
+        id: uuid(),
+      }))
+    );
   }, []);
 
+  const closeAddTableModal = (e) => {
+    e.preventDefault();
+    setOpenAddTableModal(false);
+  };
+
+  const handleOpenAddTableModal = (e) => {
+    setOpenAddTableModal(true);
+  };
   return (
     <div>
       <Navbar isBackgroundColorOn={true} />
       <div>
         <div className={Style.btn_date_container}>
           <button>תאריך</button>
-
           <div>
             {' '}
             <button
-              className={` ${!isAddTable && Style.btn_animation} ${
+              className={` ${!openAddTableModal && Style.btn_animation} ${
                 Style.btn_addtable
               }`}
-              onClick={(e) => handleAddTable(e)}
+              onClick={(e) => handleOpenAddTableModal(e)}
             >
               הוספת טבלה
             </button>{' '}
-            {isAddTable && <AddTable closeAddDropdown={setIsAddTable} />}
+            {openAddTableModal && (
+              <AddTable
+                closeAddTableModal={closeAddTableModal}
+                handleAddTable={handleAddTable}
+              />
+            )}
           </div>
         </div>
         <div className={Style.main_container}>
-          <div className={Style.category_container}>
-            {tables?.map((el, index, arr) => {
-              const date = new Date().getTime().toString();
-
+          <div className={Style.categories_container}>
+            {tables?.map((table, index, arr) => {
               return (
                 <Category
-                  key={date + index}
-                  data={el}
+                  key={table.id}
+                  data={table}
                   test={UserMock}
                   handleRemoveTable={handleRemoveTable}
                   index={index}
@@ -63,8 +85,12 @@ const Dashboard = () => {
             })}
           </div>
           <div className={Style.graph_container}>
-            <div>graph 1</div>
-            <div>graph2</div>
+            <div>
+              <BarsChart tablesData={tables} />
+            </div>
+            <div>
+              <DonatChat />
+            </div>
           </div>
         </div>
       </div>

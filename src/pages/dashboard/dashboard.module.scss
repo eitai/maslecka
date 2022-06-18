@@ -1,22 +1,24 @@
 .main_container {
   display: grid;
-  grid-template-columns: 1fr 27%;
+  grid-template-columns: 1fr 35%;
   padding: 0.5rem;
 }
-.category_container {
+.categories_container {
   display: flex;
-  justify-content: space-around;
-
   flex-wrap: wrap;
-  padding: 2rem 1rem;
+
+  flex-direction: row;
+  padding-top: 2rem;
 }
-.graph_container {
-  border: 1px solid rgb(208, 11, 11);
+.category_container {
+  display: inline-block;
+  width: 100%;
 }
+
 .btn_date_container {
   background-color: #7777;
   height: 3rem;
-  width: 72.8%;
+  width: 63%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -32,6 +34,7 @@
   text-align: center;
   border-radius: 10px;
   box-shadow: var(--box-shadow-soft);
+  display: inline-block;
 }
 .btn_animation {
   animation: scale 1s ease-in infinite alternate;

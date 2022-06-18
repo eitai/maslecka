@@ -10,12 +10,14 @@
   display: flex;
   padding: 0.2rem 0.8rem;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .input {
   box-shadow: var(--box-shadow-soft);
   padding: 0.5rem;
-  margin-top: 0.2rem;
+
   font-size: 0.8rem;
   width: 80%;
   border: 1px solid #7777;
@@ -36,6 +38,12 @@
 }
 
 .btn_container {
-  margin-top: 2rem;
   text-align: left;
+}
+
+.closemodal {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 1.3rem;
 }
