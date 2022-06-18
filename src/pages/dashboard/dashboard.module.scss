@@ -13,3 +13,36 @@
 .graph_container {
   border: 1px solid rgb(208, 11, 11);
 }
+.btn_date_container {
+  background-color: #7777;
+  height: 3rem;
+  width: 72.8%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+}
+
+.btn_addtable {
+  background-color: var(--orangeColor);
+  color: #fff;
+  height: 70%;
+  width: 9rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-soft);
+}
+.btn_animation {
+  animation: scale 1s ease-in infinite alternate;
+  -webkit-animation: scale 1s ease-in infinite alternate;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}

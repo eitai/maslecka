@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
 
-const Category = ({ handleChange, rowsData, setRowsData }) => {
+const Category = ({ data, test, handleRemoveTable, index }) => {
+  const [rowsData, setRowsData] = useState([]);
+  console.log(rowsData, 'rowsData');
+  console.log(test, 'test');
+
+  useEffect(() => {
+    setRowsData(data.rows);
+  }, [data]);
+
   const addTableRows = () => {
     const rowsInput = {
       expense: '',
@@ -17,15 +25,31 @@ const Category = ({ handleChange, rowsData, setRowsData }) => {
     setRowsData(rows);
   };
 
+  console.log(rowsData);
+
+  const handleChange = (index, event) => {
+    if (event?.target?.name) {
+      const { name, value } = event.target;
+      const rowsInput = [...rowsData];
+      rowsInput[index][name] = value;
+      setRowsData(rowsInput);
+    } else {
+      const { value, label } = event;
+      const rowsInput = [...rowsData];
+      rowsInput[index][value] = label;
+      setRowsData(rowsInput);
+    }
+  };
   return (
     <div className={`${Style.category_box}`}>
       <div className={Style.title}>
-        <span>דיור</span>
+        <span>{data.title}</span>
+        <button onClick={(el) => handleRemoveTable(el, index)}>X</button>
       </div>
       <div className={`col-sm-12 ${Style.table_container}`}>
         <table className='table'>
-          <thead className={Style.thead}>
-            <tr>
+          <thead>
+            <tr className={Style.firstrow}>
               <th>הוצאה</th>
               <th>סוג הוצאה</th>
               <th>סכום</th>
@@ -40,7 +64,7 @@ const Category = ({ handleChange, rowsData, setRowsData }) => {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className={Style.tbody}>
             <TableRows
               rowsData={rowsData}
               deleteTableRows={deleteTableRows}
