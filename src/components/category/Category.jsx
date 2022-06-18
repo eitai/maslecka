@@ -4,11 +4,6 @@ import Style from './category.module.scss';
 
 const Category = ({ data, handleRemoveTable, index }) => {
   const [rowsData, setRowsData] = useState([]);
-  console.log(rowsData, 'rowsData');
-
-  // const test = useMemo(() => {
-  //   setRowsData(data.rows);
-  // }, [data.rows]);
 
   useEffect(() => {
     setRowsData(data.rows);

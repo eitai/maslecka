@@ -12,6 +12,15 @@ const Dashboard = () => {
   const [tables, setTables] = useState([]);
   const [openAddTableModal, setOpenAddTableModal] = useState(false);
 
+  useEffect(() => {
+    setTables(
+      UserMock.sections.map((table) => ({
+        ...table,
+        id: uuid(),
+      }))
+    );
+  }, []);
+
   const handleRemoveTable = (event, index) => {
     const tempTable = [...tables];
     tempTable.splice(index, 1);
@@ -29,15 +38,6 @@ const Dashboard = () => {
     setOpenAddTableModal(false);
   };
 
-  useEffect(() => {
-    setTables(
-      UserMock.sections.map((table) => ({
-        ...table,
-        id: uuid(),
-      }))
-    );
-  }, []);
-
   const closeAddTableModal = (e) => {
     e.preventDefault();
     setOpenAddTableModal(false);
@@ -46,6 +46,7 @@ const Dashboard = () => {
   const handleOpenAddTableModal = (e) => {
     setOpenAddTableModal(true);
   };
+
   return (
     <div>
       <Navbar isBackgroundColorOn={true} />
@@ -89,7 +90,7 @@ const Dashboard = () => {
               <BarsChart tablesData={tables} />
             </div>
             <div>
-              <DonatChat />
+              <DonatChat tablesData={tables} />
             </div>
           </div>
         </div>

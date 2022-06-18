@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
+import randomColor from 'randomcolor';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,54 +19,56 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart - Stacked',
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
 
 const BarsChart = ({ tablesData }) => {
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
+  let color = randomColor();
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [1000, 222, 344, 324, 563, 123],
-        backgroundColor: 'rgb(255, 99, 132)',
+  // const labels = useMemo(() => {
+  //   const labels = tablesData.map((label) => {
+  //     return label.title;
+  //   });
+  // }, [tablesData]);
+
+  const data = useMemo(() => {
+    if (tablesData) {
+      const labels = tablesData.map((label) => {
+        return label.title;
+      });
+      console.log(labels);
+
+      const dataSet = tablesData?.map((category) => {
+        const rows = category.rows;
+        const rowData = rows.map((el) => {
+          return { kind: el.kind, amount: el.amount };
+        });
+
+        return { data: rowData, backgroundColor: color };
+      });
+      console.log({ labels, datasets: dataSet });
+      return { labels, datasets: dataSet };
+    }
+  }, [tablesData, color]);
+
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart - Stacked',
       },
-      {
-        label: 'Dataset 2',
-        data: [100, 242, 344, 324, 523, 123],
-        backgroundColor: 'rgb(75, 192, 192)',
+    },
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
       },
-      {
-        label: 'Dataset 3',
-        data: [100, 242, 344, 324, 523, 123],
-        backgroundColor: 'rgb(53, 162, 235)',
+      y: {
+        stacked: true,
       },
-    ],
+    },
+    parsing: {
+      xAxisKey: 'kind',
+      yAxisKey: 'amount',
+    },
   };
 
   return (
