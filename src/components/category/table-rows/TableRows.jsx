@@ -12,22 +12,16 @@ const customStyles = {
 
 const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
   return rowsData.map((data, index) => {
-    const { expense, kind, amount } = data;
+    const { kind, amount } = data;
 
     const dropdownData = [
       { value: 'expense', label: 'קבוע' },
       { value: 'expense', label: 'משתנה' },
     ];
+
     return (
       <tr key={index}>
         <td>
-          {/* <input
-            type='text'
-            value={fullName}
-            onChange={(event) => handleChange(index, event)}
-             name='expense'
-            className='form-control'
-          /> */}
           <Select
             defaultValue={dropdownData[0]}
             options={dropdownData}

@@ -5,6 +5,7 @@ const AddTable = ({ handleAddTable, closeAddTableModal }) => {
 
   const handleChange = (event) => {
     const { value } = event.target;
+
     const section = value;
     setSectionName(section);
   };
@@ -26,7 +27,7 @@ const AddTable = ({ handleAddTable, closeAddTableModal }) => {
         <div className={Style.btn_container}>
           <button
             className={Style.btn}
-            onClick={(e) => handleAddTable(e, sectionName)}
+            onClick={() => handleAddTable(sectionName)}
           >
             הוסף טבלה
           </button>

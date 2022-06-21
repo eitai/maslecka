@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useId } from 'react';
+import React, { useState, useEffect, useId, useCallback, useMemo } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Category from '../../components/category/Category';
 import Style from './dashboard.module.scss';
@@ -12,6 +12,40 @@ const Dashboard = () => {
   const [tables, setTables] = useState([]);
   const [openAddTableModal, setOpenAddTableModal] = useState(false);
 
+  const tablesChartData = useMemo(() => {
+    const datasets = tables.map((category, index) => {
+      const rowData = category.rows
+        .map((row) => {
+          const amout = row.amount;
+          return amout;
+        })
+        .reduce((pv, cv) => {
+          if (cv === '') {
+            cv = 0;
+            const prev = parseInt(cv);
+
+            return prev + cv;
+          } else {
+            const prev = parseInt(pv);
+            const curr = parseInt(cv);
+            return prev + curr;
+          }
+        }, 0);
+      return rowData;
+    });
+
+    const labels = tables.map((label) => {
+      return label.title;
+    });
+
+    const data = {
+      labels: labels,
+      datasets: { labels: labels, data: datasets },
+    };
+
+    return data;
+  }, [tables]);
+
   useEffect(() => {
     setTables(
       UserMock.sections.map((table) => ({
@@ -22,16 +56,23 @@ const Dashboard = () => {
   }, []);
 
   const handleRemoveTable = (event, index) => {
+    event.preventDefault();
     const tempTable = [...tables];
     tempTable.splice(index, 1);
     setTables(tempTable);
   };
 
-  const handleAddTable = (e, sectionName) => {
+  const handleRowUpdate = (event, index) => {
+    const newTables = [...tables];
+    newTables[index].rows = event;
+    setTables(newTables);
+  };
+
+  const handleAddTable = (value) => {
     const newTables = [...tables];
     newTables.push({
       id: uuid(),
-      title: sectionName,
+      title: value,
       rows: [{ expense: '', kind: '', amount: '' }],
     });
     setTables(newTables);
@@ -54,7 +95,6 @@ const Dashboard = () => {
         <div className={Style.btn_date_container}>
           <button>תאריך</button>
           <div>
-            {' '}
             <button
               className={` ${!openAddTableModal && Style.btn_animation} ${
                 Style.btn_addtable
@@ -62,11 +102,11 @@ const Dashboard = () => {
               onClick={(e) => handleOpenAddTableModal(e)}
             >
               הוספת טבלה
-            </button>{' '}
+            </button>
             {openAddTableModal && (
               <AddTable
                 closeAddTableModal={closeAddTableModal}
-                handleAddTable={handleAddTable}
+                handleAddTable={(e) => handleAddTable(e)}
               />
             )}
           </div>
@@ -80,17 +120,18 @@ const Dashboard = () => {
                   data={table}
                   test={UserMock}
                   handleRemoveTable={handleRemoveTable}
-                  index={index}
+                  tableIndex={index}
+                  handleRowUpdate={handleRowUpdate}
                 />
               );
             })}
           </div>
           <div className={Style.graph_container}>
-            <div>
-              <BarsChart tablesData={tables} />
+            <div className={Style.graph_bars}>
+              <BarsChart tablesData={tablesChartData} />
             </div>
-            <div>
-              <DonatChat tablesData={tables} />
+            <div className={Style.graph_donut}>
+              <DonatChat tablesData={tablesChartData} />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
 
-const Category = ({ data, handleRemoveTable, index }) => {
+const Category = ({ data, handleRemoveTable, tableIndex, handleRowUpdate }) => {
   const [rowsData, setRowsData] = useState([]);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const Category = ({ data, handleRemoveTable, index }) => {
     const rows = [...rowsData];
     rows.splice(index, 1);
     setRowsData(rows);
+    handleRowUpdate(rowsData, tableIndex);
   };
 
   const handleChange = (index, event) => {
@@ -35,13 +36,14 @@ const Category = ({ data, handleRemoveTable, index }) => {
       rowsInput[index][value] = label;
       setRowsData(rowsInput);
     }
+    handleRowUpdate(rowsData, tableIndex);
   };
 
   return (
     <div className={`${Style.category_box}`}>
       <div className={Style.title}>
         <span>{data.title}</span>
-        <button onClick={(el) => handleRemoveTable(el, index)}>X</button>
+        <button onClick={(el) => handleRemoveTable(el, tableIndex)}>X</button>
       </div>
       <div className={`col-sm-12 ${Style.table_container}`}>
         <table className='table'>
@@ -74,4 +76,4 @@ const Category = ({ data, handleRemoveTable, index }) => {
   );
 };
 
-export default React.memo(Category);
+export default Category;

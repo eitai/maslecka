@@ -11,18 +11,6 @@ import { login, logout } from './store/userSlice';
 
 import { auth, onAuthStateChanged, signOutUser } from './firebase';
 
-const RequireAuth = ({ children }) => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
-  // console.log(isLoggedIn, 'require');
-
-  if (!isLoggedIn) {
-    return <Navigate to='/' />;
-  }
-
-  return children;
-};
-
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = auth.currentUser;
@@ -51,14 +39,15 @@ const App = () => {
       <Routes>
         <Route index element={<HomePage />} />
 
-        <Route
+        {/* <Route
           path='dashboard'
           element={
             <RequireAuth>
               <Dashboard />
             </RequireAuth>
           }
-        />
+        /> */}
+        <Route path='dashboard' element={<Dashboard />} />
       </Routes>
     </>
   );

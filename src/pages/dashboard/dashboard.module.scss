@@ -53,3 +53,20 @@
     transform: scale(1.2);
   }
 }
+
+.graph_container {
+  padding: 2rem;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.graph_donut {
+  width: 70%;
+}
+.graph_bars {
+  width: 90%;
+  margin-bottom: 2rem;
+}
