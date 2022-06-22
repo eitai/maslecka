@@ -54,7 +54,6 @@ const SignUp = ({ closeForm, setIsSignIn }) => {
           setIsError(false);
           createUserDocumentFromAuth(userAuth.user);
           setLastLogin(userAuth.user);
-          console.log(userAuth, 'XXXXXXX');
           updateProfile(userAuth.user, {
             displayName: name.split(' ')[0],
           }).then(() => {

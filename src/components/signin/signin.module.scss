@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
 .btn_google {
   background: #ff1500;
   margin-top: 1rem;
@@ -11,6 +17,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.icon {
+  margin-right: 0.7rem;
 }
 .btn_container {
   display: flex;
@@ -30,4 +39,25 @@
   margin: 0 auto;
   padding: 3rem 0;
   position: relative;
+}
+
+.btn_signIn {
+  width: 15rem;
+  height: 3rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1.8rem;
+  background: var(--secondaryColor);
+  border-radius: 10px;
+}
+
+.img_happy {
+  width: 8rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+.signin_container {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
 }

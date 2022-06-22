@@ -60,14 +60,17 @@ const setLastLogin = async (userAuth) => {
 
 const signOutUser = async (userAuth) => signOut(auth);
 
+const signInUserWithEmailAndPassword = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
 export {
   auth,
   createUserWithEmailAndPassword,
   updateProfile,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
   signOutUser,
   googleProvider,
   createUserDocumentFromAuth,
   setLastLogin,
+  signInUserWithEmailAndPassword,
 };

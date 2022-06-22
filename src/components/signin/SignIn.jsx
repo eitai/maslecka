@@ -10,12 +10,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActiveUser, login } from '../../store/userSlice';
 import {
   auth,
-  createUserWithEmailAndPassword,
   updateProfile,
-  signInWithEmailAndPassword,
   createUserDocumentFromAuth,
   googleProvider,
   setLastLogin,
+  signInUserWithEmailAndPassword,
 } from '../../firebase';
 
 const inputStyle = {
@@ -30,7 +29,6 @@ const validationSchema = yup.object().shape({
     .min(4, 'נא להכניס סיסמא של 4-20 תווים')
     .max(20)
     .required(),
-  confirmPassword: yup.string().required(),
 });
 
 const SignIn = ({ closeForm, setIsSignIn, open }) => {
@@ -43,6 +41,7 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
+
   const handleSignInWithGoogle = () => {
     auth.signInWithPopup(googleProvider).then((result) => {
       const user = result.user.multiFactor.user;
@@ -55,12 +54,23 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
           userName: user.displayName,
         })
       );
+    });
+  };
+  const handleFormSubmit = (data) => {
+    signInUserWithEmailAndPassword(email, password).then((result) => {
+      setLastLogin(result.user);
+      dispatch(
+        login({
+          email: result.user.email,
+          uid: result.user.uid,
+          displayName: result.user.displayName,
+        })
+      );
       closeForm();
     });
   };
-  const handleFormSubmit = (data) => {};
   return (
-    <div>
+    <div className={Style.container}>
       <div className={Style.btn_container}>
         <button className={Style.btn_google} onClick={handleSignInWithGoogle}>
           הרשם עם גוגל
@@ -71,6 +81,11 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
           <FaFacebook className={Style.icon} />
         </button> */}
       </div>
+      <img
+        src={require('../../../src/assets/businessman_PNG6572.png')}
+        alt=''
+        className={Style.img_happy}
+      />
       <form className={Style.form} onSubmit={handleSubmit(handleFormSubmit)}>
         <TextField
           error={errors?.lastname}
@@ -93,7 +108,15 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
           type='password'
           onChange={(e) => setPassword(e.target.value)}
         />
+
+        <input type='submit' value='התחבר' className={Style.btn_signIn} />
       </form>
+      <div className={Style.signin_container}>
+        <span className={Style.text}>עוד לא רשום במערכת? </span>
+        <button className={Style.signin_btn} onClick={() => setIsSignIn(false)}>
+          הרשם
+        </button>
+      </div>
     </div>
   );
 };
