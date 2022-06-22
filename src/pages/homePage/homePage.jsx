@@ -33,14 +33,10 @@ const HomePage = () => {
   const [isSignedIn, setIsSignIn] = useState(false);
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  const handleSignupForm = (e, test) => {
+  const handleAuthForm = (e, isSignin, authType) => {
     e.preventDefault();
+    setIsSignIn(isSignin);
     setOpenForm(!openForm);
-    setIsSignIn(false);
-
-    if (test && test === 'sign-in') {
-      setIsSignIn(!isSignedIn);
-    }
   };
 
   useEffect(() => {
@@ -58,7 +54,10 @@ const HomePage = () => {
   const GuestBtn = () => {
     return (
       <div className={Style.btn_container}>
-        <button className={Style.btn_reg} onClick={handleSignupForm}>
+        <button
+          className={Style.btn_reg}
+          onClick={(e) => handleAuthForm(e, false, 'sign-up')}
+        >
           הרשם עכשיו
         </button>
         <button className={Style.btn_test}>
@@ -85,7 +84,7 @@ const HomePage = () => {
     <>
       <div>
         <div className={Style.container}>
-          <Navbar handleSignup={handleSignupForm} />
+          <Navbar handleAuthForm={handleAuthForm} />
           <div className={Style.text_container}>
             <h1 className={Style.title}>קצב פיננסי</h1>
             <p className={Style.subtitle}>מקצצים בעלויות מכפילים</p>
@@ -166,9 +165,11 @@ const HomePage = () => {
         <Fade in={openForm}>
           <Box className={Style.signup_box}>
             {openForm && !isSignedIn && (
-              <SignUp open={openForm} closeForm={handleCloseForm} />
+              <SignUp closeForm={handleCloseForm} setIsSignIn={setIsSignIn} />
             )}
-            {openForm && isSignedIn && <SignIn open={openForm} />}
+            {openForm && isSignedIn && (
+              <SignIn setIsSignIn={setIsSignIn} closeForm={handleCloseForm} />
+            )}
           </Box>
         </Fade>
       </Modal>

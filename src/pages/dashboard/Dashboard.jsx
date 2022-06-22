@@ -67,6 +67,11 @@ const Dashboard = () => {
     newTables[index].rows = event;
     setTables(newTables);
   };
+  const handleRemoveUpdate = (event, index) => {
+    const newTables = [...tables];
+    newTables[index].rows = event;
+    setTables(newTables);
+  };
 
   const handleAddTable = (value) => {
     const newTables = [...tables];
@@ -122,6 +127,7 @@ const Dashboard = () => {
                   handleRemoveTable={handleRemoveTable}
                   tableIndex={index}
                   handleRowUpdate={handleRowUpdate}
+                  test2={handleRemoveUpdate}
                 />
               );
             })}

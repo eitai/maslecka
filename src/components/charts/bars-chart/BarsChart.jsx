@@ -53,6 +53,22 @@ const BarsChart = ({ tablesData }) => {
       legend: {
         display: false,
       },
+      datalabels: {
+        color: '#000',
+        textAlign: 'center',
+        anchor: 'end',
+        align: 'end',
+        padding: {
+          left: 2,
+          right: 2,
+          top: 0,
+          bottom: 0,
+        },
+        font: {
+          size: 15,
+          weight: 'bold',
+        },
+      },
     },
   };
   return <div>{tablesData && <Bar options={options} data={data} />}</div>;

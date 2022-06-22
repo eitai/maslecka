@@ -36,13 +36,13 @@
   height: 70%;
   width: 9rem;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 3px;
   box-shadow: var(--box-shadow-soft);
   display: inline-block;
 }
 .btn_animation {
-  animation: scale 1s ease-in infinite alternate;
-  -webkit-animation: scale 1s ease-in infinite alternate;
+  animation: scale 1s ease-in infinite 2s alternate;
+  -webkit-animation: scale 1s ease-in 2s infinite alternate;
 }
 
 @keyframes scale {

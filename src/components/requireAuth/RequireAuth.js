@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { auth, onAuthStateChanged } from '../../firebase';
 
-const RequireAuth = ({ children }) => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+const RequireAuth = ({ children, isLoggedIn }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(isLoggedIn);
 
-  // console.log(isLoggedIn, 'require');
-
+  async function verify() {
+    await onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        setIsLoading(false);
+      } else {
+        return;
+      }
+    });
+  }
+  useEffect(() => {
+    verify();
+  });
   if (!isLoggedIn) {
     return <Navigate to='/' />;
   }
 
-  return;
+  return children;
 };
 
 export default RequireAuth;

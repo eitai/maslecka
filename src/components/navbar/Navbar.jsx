@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { signOutUser } from '../../firebase';
 
-const Navbar = ({ handleSignup, isBackgroundColorOn }) => {
+const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
+  const user = useSelector((state) => state.user.user.displayName);
   const handleLogout = () => {
     signOutUser();
   };
@@ -27,11 +27,17 @@ const Navbar = ({ handleSignup, isBackgroundColorOn }) => {
       }`}
     >
       {isLoggedIn ? (
-        <button className={Style.btn} onClick={handleLogout}>
-          התנתק
-        </button>
+        <div className={Style.disconnect_btn_container}>
+          <button className={Style.btn} onClick={handleLogout}>
+            התנתק
+          </button>
+          <span>{`ברוך הבא ${user} `}</span>
+        </div>
       ) : (
-        <button className={Style.btn} onClick={() => handleSignup('sign-in')}>
+        <button
+          className={Style.btn}
+          onClick={(e) => handleAuthForm(e, true, 'sign-in')}
+        >
           התחבר
         </button>
       )}

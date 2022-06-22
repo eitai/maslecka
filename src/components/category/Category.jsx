@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
 
-const Category = ({ data, handleRemoveTable, tableIndex, handleRowUpdate }) => {
+const Category = ({
+  data,
+  test2,
+  handleRemoveTable,
+  tableIndex,
+  handleRowUpdate,
+}) => {
   const [rowsData, setRowsData] = useState([]);
 
   useEffect(() => {
@@ -21,7 +27,8 @@ const Category = ({ data, handleRemoveTable, tableIndex, handleRowUpdate }) => {
     const rows = [...rowsData];
     rows.splice(index, 1);
     setRowsData(rows);
-    handleRowUpdate(rowsData, tableIndex);
+
+    test2(rows, tableIndex);
   };
 
   const handleChange = (index, event) => {

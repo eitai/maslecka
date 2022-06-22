@@ -12,7 +12,6 @@ import {
   auth,
   createUserWithEmailAndPassword,
   updateProfile,
-  signInWithEmailAndPassword,
   googleProvider,
   createUserDocumentFromAuth,
   setLastLogin,
@@ -32,10 +31,8 @@ const inputStyle = {
   width: '100%',
   mb: 3,
 };
-const SignUp = ({ open, closeForm }) => {
+const SignUp = ({ closeForm, setIsSignIn }) => {
   const dispatch = useDispatch();
-  const test = useSelector((state) => state.user);
-  console.log(test, 'select');
   const {
     register,
     handleSubmit,
@@ -45,40 +42,46 @@ const SignUp = ({ open, closeForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [currentError, setCurrentError] = useState('');
   const [name, setName] = useState('');
 
   const handleFormSubmit = (data) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userAuth) => {
-        createUserDocumentFromAuth(userAuth.user);
-        setLastLogin(userAuth.user);
-        console.log(userAuth, 'XXXXXXX');
-
-        updateProfile(userAuth.user, {
-          displayName: lastName,
-        })
-          .then(() => {
+    setIsError(false);
+    if (confirmPassword === password) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userAuth) => {
+          setIsError(false);
+          createUserDocumentFromAuth(userAuth.user);
+          setLastLogin(userAuth.user);
+          console.log(userAuth, 'XXXXXXX');
+          updateProfile(userAuth.user, {
+            displayName: name.split(' ')[0],
+          }).then(() => {
             dispatch(
               login({
                 email: userAuth.user.email,
                 uid: userAuth.user.uid,
-                displayName: name + ' ' + lastName,
+                displayName: name,
               })
             );
-
-            // setOpen(false);
-            // setTimeout(() => {
-            //   navigate('loggedin/dashboard', { replace: true });
-            // }, 1000);
-          })
-          .catch((error) => {
-            console.log('user not updated');
           });
-      })
-      .catch((err) => {
-        alert(err);
-      });
+
+          closeForm();
+        })
+        .catch((err) => {
+          if (
+            err.message ===
+            'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'
+          ) {
+            setCurrentError('משתמש קיים במערכת');
+            setIsError(true);
+          }
+        });
+    } else {
+      setCurrentError('סיסמא לא תואמת');
+      setIsError(true);
+    }
   };
 
   const handleSignInWithGoogle = () => {
@@ -86,7 +89,6 @@ const SignUp = ({ open, closeForm }) => {
       const user = result.user.multiFactor.user;
       createUserDocumentFromAuth(user);
       setLastLogin(user);
-      console.log(user.user);
       dispatch(
         setActiveUser({
           userEmail: user.email,
@@ -95,10 +97,6 @@ const SignUp = ({ open, closeForm }) => {
         })
       );
       closeForm();
-      // setOpen(false);
-      // setTimeout(() => {
-      //   navigate('loggedin/dashboard', { replace: true });
-      // }, 1000);
     });
   };
 
@@ -128,30 +126,29 @@ const SignUp = ({ open, closeForm }) => {
         />
         <TextField
           error={errors?.lastname}
-          id='outlined-error-helper-text'
           label='אימייל'
           helperText={errors?.name}
           {...register('email')}
           className={Style.input}
           size='small'
           sx={inputStyle}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           error={errors.password}
-          id='outlined-error-helper-text'
           label='סיסמה'
           helperText={errors.password ? errors.password.message : ''}
           {...register('password')}
           className={Style.input}
           size='small'
           sx={inputStyle}
+          type='password'
           onChange={(e) => setPassword(e.target.value)}
         />
         <TextField
           error={errors.confirmPassword}
-          id='outlined-error-helper-text'
           label='אימות סיסמא'
+          type='password'
           helperText={
             errors.confirmPassword ? errors.confirmPassword.message : ''
           }
@@ -162,10 +159,14 @@ const SignUp = ({ open, closeForm }) => {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <input type='submit' value='הרשם עכשיו' className={Style.btn_signup} />
+        {isError && <div className={Style.error_password}>{currentError}</div>}
       </form>
+
       <div className={Style.signin_container}>
         <span className={Style.text}>כבר רשום במערכת?</span>
-        <button className={Style.signin_btn}>התחבר</button>
+        <button className={Style.signin_btn} onClick={() => setIsSignIn(true)}>
+          התחבר
+        </button>
       </div>
     </div>
   );

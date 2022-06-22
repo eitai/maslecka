@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import HomePage from './pages/homePage/homePage';
 import Dashboard from './pages/dashboard/Dashboard';
-// import RequireAuth from './components/requireAuth/RequireAuth';
+import RequireAuth from './components/requireAuth/RequireAuth';
 import { Routes, Route, Navigate } from 'react-router-dom';
 // import '@coreui/coreui/dist/css/coreui.min.css';
 
@@ -13,11 +13,13 @@ import { auth, onAuthStateChanged, signOutUser } from './firebase';
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = auth.currentUser;
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
       if (userAuth) {
+        setIsLoggedIn(true);
         // user is logged in, send the user's details to redux, store the current user in the state
         dispatch(
           login({
@@ -28,6 +30,7 @@ const App = () => {
           })
         );
       } else {
+        setIsLoggedIn(false);
         dispatch(logout());
         signOutUser();
       }
@@ -39,14 +42,14 @@ const App = () => {
       <Routes>
         <Route index element={<HomePage />} />
 
-        {/* <Route
+        <Route
           path='dashboard'
           element={
-            <RequireAuth>
+            <RequireAuth isLoggedIn={isLoggedIn}>
               <Dashboard />
             </RequireAuth>
           }
-        /> */}
+        />
         <Route path='dashboard' element={<Dashboard />} />
       </Routes>
     </>
