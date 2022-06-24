@@ -45,9 +45,9 @@ const App = () => {
         <Route
           path='dashboard'
           element={
-            <RequireAuth isLoggedIn={isLoggedIn}>
-              <Dashboard />
-            </RequireAuth>
+            // <RequireAuth isLoggedIn={isLoggedIn}>
+            <Dashboard />
+            // </RequireAuth>
           }
         />
         <Route path='dashboard' element={<Dashboard />} />

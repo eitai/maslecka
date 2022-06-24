@@ -19,3 +19,30 @@ button {
 .navbar_bt {
   border-bottom: 2px solid rgb(16, 159, 255);
 }
+
+//MUI STYLES
+
+.PrivatePickersYear-root {
+  text-align: center;
+}
+.MuiOutlinedInput-root {
+  .muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: unset;
+    cursor: pointer;
+  }
+}
+.muirtl-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  color: #fff;
+  cursor: pointer;
+}
+// MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd muirtl-nxo287-MuiInputBase-input-MuiOutlinedInput-input
+// MuiOutlinedInput-input MuiInputBase-input MuiInputBase-inputAdornedEnd muirtl-nxo287-MuiInputBase-input-MuiOutlinedInput-input
+.datepicker_container {
+  background-color: rgba(153, 102, 255, 0.6);
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}

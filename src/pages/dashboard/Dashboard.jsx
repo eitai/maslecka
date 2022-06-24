@@ -7,7 +7,10 @@ import AddTable from '../../components/category/add-table/AddTable';
 import BarsChart from '../../components/charts/bars-chart/BarsChart';
 import DonatChat from '../../components/charts/donut-chart/DonutChart';
 import { v4 as uuid } from 'uuid';
-
+import MuiDatepicker from '../../components/datepicker/datepicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { he } from 'date-fns/locale';
 const Dashboard = () => {
   const [tables, setTables] = useState([]);
   const [openAddTableModal, setOpenAddTableModal] = useState(false);
@@ -98,7 +101,14 @@ const Dashboard = () => {
       <Navbar isBackgroundColorOn={true} />
       <div>
         <div className={Style.btn_date_container}>
-          <button>תאריך</button>
+          <div className='datepicker_container'>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              adapterLocale={he}
+            >
+              <MuiDatepicker />
+            </LocalizationProvider>
+          </div>
           <div>
             <button
               className={` ${!openAddTableModal && Style.btn_animation} ${
