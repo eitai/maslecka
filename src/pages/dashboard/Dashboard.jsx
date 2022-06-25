@@ -11,30 +11,52 @@ import MuiDatepicker from '../../components/datepicker/datepicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { he } from 'date-fns/locale';
+import { saveNewTimeStamp, getUserTableDataByTimestamp } from '../../firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
+
 const Dashboard = () => {
   const [tables, setTables] = useState([]);
   const [openAddTableModal, setOpenAddTableModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTimeStamp, setSelectedTimeStamp] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const userId = useSelector((state) => state.user.user.uid);
 
   useEffect(() => {
-    const date = new Date();
-    setSelectedDate(date);
-  }, [selectedTimeStamp]);
+    setLoading(true);
+    handleDateChange();
 
-  useEffect(() => {
-    setTables(
-      UserMock[1682899200].sections.map((table) => ({
-        ...table,
-        id: uuid(),
-      }))
-    );
-  }, [selectedTimeStamp]);
+    if (userId) {
+      userDatabyTimestamp().then((data) => {
+        console.log(data.timestamp);
+        setTables(data.timestamp);
+        setLoading(false);
+      });
+    }
+  }, [selectedTimeStamp, userId]);
+
+  const userDatabyTimestamp = async () => {
+    const userData = await getUserTableDataByTimestamp(
+      userId,
+      selectedTimeStamp
+    ).then((result) => {
+      return result;
+    });
+    return userData;
+  };
 
   const handleDateChange = (date) => {
-    const newDate = Date.parse(date);
-    setSelectedTimeStamp(newDate / 1000);
-    setSelectedDate(date);
+    if (date) {
+      const newDate = Date.parse(date);
+      setSelectedTimeStamp(newDate / 1000);
+      setSelectedDate(date);
+    } else {
+      const currentDate = moment().format('M:YYYY');
+      const newDate = currentDate.split(':').join('');
+      setSelectedTimeStamp(newDate);
+      setSelectedDate(currentDate);
+    }
     console.log(selectedTimeStamp);
   };
 
@@ -71,6 +93,7 @@ const Dashboard = () => {
 
     return data;
   }, [tables]);
+  if (loading) return;
 
   const handleRemoveTable = (event, index) => {
     event.preventDefault();

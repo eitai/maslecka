@@ -72,7 +72,7 @@ const signInUserWithEmailAndPassword = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-const saveNewTimeStamp = async (uid, updatedTable, timestamp) => {
+const saveNewTimeStamp = async (uid, timestamp, updatedTable) => {
   const userDocRef = db
     .collection(`tables/${uid}/timestamp`)
     .doc(`${timestamp}`);
@@ -100,13 +100,18 @@ const getUserTableDataByTimestamp = async (uid, timestamp) => {
     .collection(`tables/${uid}/timestamp`)
     .doc(`${timestamp}`);
 
-  console.log(userDocRef);
-  const userSnapShot = await getDoc(userDocRef).then((timestampData) => {
-    const data = timestampData.data();
-    console.log(data);
-    return data;
-  });
-  return userSnapShot;
+  const userSnapShot = await getDoc(userDocRef);
+  console.log(userSnapShot.exists());
+  if (!userSnapShot.exists()) {
+    saveNewTimeStamp(uid, timestamp);
+    getUserTableDataByTimestamp(uid, timestamp);
+  } else {
+    const userdata = await getDoc(userDocRef).then((timestampData) => {
+      const data = timestampData.data();
+      return data;
+    });
+    return userdata;
+  }
 };
 
 export {

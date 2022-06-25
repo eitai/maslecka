@@ -10,7 +10,7 @@ const Test = () => {
     saveNewTimeStamp(UserId, UserMock, 1632132234200);
   };
   const handleGetDataFromDB = () => {
-    getUserTableDataByTimestamp(UserId, 1632132234200).then((data) => {
+    getUserTableDataByTimestamp(UserId, 16321324234200).then((data) => {
       console.log(data);
     });
   };
