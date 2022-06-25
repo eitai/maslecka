@@ -45,6 +45,7 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
   const handleSignInWithGoogle = () => {
     auth.signInWithPopup(googleProvider).then((result) => {
       const user = result.user.multiFactor.user;
+
       createUserDocumentFromAuth(user);
       setLastLogin(user);
       dispatch(
@@ -54,6 +55,7 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
           userName: user.displayName,
         })
       );
+      closeForm();
     });
   };
   const handleFormSubmit = (data) => {

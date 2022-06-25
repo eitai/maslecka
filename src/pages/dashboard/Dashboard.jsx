@@ -14,6 +14,29 @@ import { he } from 'date-fns/locale';
 const Dashboard = () => {
   const [tables, setTables] = useState([]);
   const [openAddTableModal, setOpenAddTableModal] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTimeStamp, setSelectedTimeStamp] = useState(null);
+
+  useEffect(() => {
+    const date = new Date();
+    setSelectedDate(date);
+  }, [selectedTimeStamp]);
+
+  useEffect(() => {
+    setTables(
+      UserMock[1682899200].sections.map((table) => ({
+        ...table,
+        id: uuid(),
+      }))
+    );
+  }, [selectedTimeStamp]);
+
+  const handleDateChange = (date) => {
+    const newDate = Date.parse(date);
+    setSelectedTimeStamp(newDate / 1000);
+    setSelectedDate(date);
+    console.log(selectedTimeStamp);
+  };
 
   const tablesChartData = useMemo(() => {
     const datasets = tables.map((category, index) => {
@@ -48,15 +71,6 @@ const Dashboard = () => {
 
     return data;
   }, [tables]);
-
-  useEffect(() => {
-    setTables(
-      UserMock.sections.map((table) => ({
-        ...table,
-        id: uuid(),
-      }))
-    );
-  }, []);
 
   const handleRemoveTable = (event, index) => {
     event.preventDefault();
@@ -106,7 +120,10 @@ const Dashboard = () => {
               dateAdapter={AdapterDateFns}
               adapterLocale={he}
             >
-              <MuiDatepicker />
+              <MuiDatepicker
+                selectedDate={selectedDate}
+                handleDateChange={handleDateChange}
+              />
             </LocalizationProvider>
           </div>
           <div>

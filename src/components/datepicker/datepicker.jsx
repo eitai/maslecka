@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 
-const MuiDatepicker = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-
+const MuiDatepicker = ({ selectedDate, handleDateChange }) => {
   return (
     <Stack spacing={4} sx={{ width: '180px' }}>
       <DatePicker
@@ -16,16 +14,17 @@ const MuiDatepicker = () => {
             sx={{
               svg: { color: '#fff', fontSize: '35px' },
               input: { color: '#fff' },
-              label: { color: '#fff', fontSize: '20px' },
+              label: { color: 'transparent', fontSize: '20px' },
             }}
             inputProps={{
               ...params.inputProps,
-              placeholder: 'MM/YYYY',
+              placeholder: 'בחרו תאריך',
             }}
           />
         )}
         value={selectedDate}
-        onChange={(value) => setSelectedDate(value)}
+        onChange={() => undefined}
+        onAccept={(value) => handleDateChange(value)}
         minDate={new Date('2022-01-01')}
         maxDate={new Date('2023-06-01')}
         views={['month', 'year']}

@@ -1,12 +1,20 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import { UserMock } from './pages/dashboard/userMock';
+
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
+  query,
+  where,
+  collection,
+  getDocs,
 } from 'firebase/firestore';
 
 import { initializeApp } from 'firebase/app';
@@ -32,7 +40,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-export const db = getFirestore();
+export const db = firebase.firestore();
 
 const auth = firebase.auth();
 
@@ -63,7 +71,47 @@ const signOutUser = async (userAuth) => signOut(auth);
 const signInUserWithEmailAndPassword = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
+
+const saveNewTimeStamp = async (uid, updatedTable, timestamp) => {
+  const userDocRef = db
+    .collection(`tables/${uid}/timestamp`)
+    .doc(`${timestamp}`);
+
+  const userSnapShot = await getDoc(userDocRef);
+
+  if (!userSnapShot.exists()) {
+    const mockdata = {};
+    mockdata.timestamp = UserMock;
+    try {
+      await setDoc(userDocRef, mockdata);
+    } catch (e) {}
+  } else {
+    const tableUpdatedData = {};
+    tableUpdatedData[timestamp] = updatedTable;
+    try {
+      await updateDoc(userDocRef, tableUpdatedData);
+    } catch (e) {}
+  }
+  return userDocRef;
+};
+
+const getUserTableDataByTimestamp = async (uid, timestamp) => {
+  const userDocRef = db
+    .collection(`tables/${uid}/timestamp`)
+    .doc(`${timestamp}`);
+
+  console.log(userDocRef);
+  const userSnapShot = await getDoc(userDocRef).then((timestampData) => {
+    const data = timestampData.data();
+    console.log(data);
+    return data;
+  });
+  return userSnapShot;
+};
+
 export {
+  getUserTableDataByTimestamp,
+  saveNewTimeStamp,
   auth,
   createUserWithEmailAndPassword,
   updateProfile,

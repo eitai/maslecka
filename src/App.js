@@ -6,6 +6,7 @@ import RequireAuth from './components/requireAuth/RequireAuth';
 import { Routes, Route, Navigate } from 'react-router-dom';
 // import '@coreui/coreui/dist/css/coreui.min.css';
 
+import Test from '../src/pages/test';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from './store/userSlice';
 
@@ -41,6 +42,7 @@ const App = () => {
     <>
       <Routes>
         <Route index element={<HomePage />} />
+        <Route path='test' element={<Test />} />
 
         <Route
           path='dashboard'
