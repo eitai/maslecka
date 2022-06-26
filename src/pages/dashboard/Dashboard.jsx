@@ -117,6 +117,8 @@ const Dashboard = () => {
     const newTables = [...tables];
     newTables[index].rows = event;
     setTables(newTables);
+    console.log(newTables);
+    saveNewTimeStamp(userId, selectedTimeStamp, newTables);
   };
   const handleRemoveUpdate = (event, index) => {
     const newTables = [...tables];

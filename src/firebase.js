@@ -87,11 +87,12 @@ const saveNewTimeStamp = async (uid, timestamp, updatedTable) => {
     } catch (e) {}
   } else {
     const tableUpdatedData = {};
-    tableUpdatedData[timestamp] = updatedTable;
+    tableUpdatedData.timestamp = updatedTable;
     try {
       await updateDoc(userDocRef, tableUpdatedData);
     } catch (e) {}
   }
+  console.log(userDocRef);
   return userDocRef;
 };
 

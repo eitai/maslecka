@@ -26,7 +26,7 @@ const MuiDatepicker = ({ selectedDate, handleDateChange }) => {
         onChange={() => undefined}
         onAccept={(value) => handleDateChange(value)}
         minDate={new Date('2022-01-01')}
-        maxDate={new Date('2023-06-01')}
+        maxDate={new Date('2030-06-01')}
         views={['month', 'year']}
       />
     </Stack>
