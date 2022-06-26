@@ -24,41 +24,50 @@ const Dashboard = () => {
   const userId = useSelector((state) => state.user.user.uid);
 
   useEffect(() => {
-    setLoading(true);
-    handleDateChange();
+    const currentDateMoment = moment().format('M:YYYY');
+    const newDate = currentDateMoment.split(':').join('');
+    setSelectedTimeStamp(newDate);
+    const jsDate = new Date();
+    setSelectedDate(jsDate);
+  }, []);
 
-    if (userId) {
-      userDatabyTimestamp().then((data) => {
+  useEffect(() => {
+    setLoading(true);
+
+    userDatabyTimestamp().then((data) => {
+      if (data !== undefined) {
         console.log(data.timestamp);
-        setTables(data.timestamp);
-        setLoading(false);
-      });
-    }
-  }, [selectedTimeStamp, userId]);
+        setTables(
+          data.timestamp.map((table) => ({
+            ...table,
+            id: uuid(),
+          }))
+        );
+      }
+    });
+
+    setLoading(false);
+  }, [selectedTimeStamp]);
 
   const userDatabyTimestamp = async () => {
-    const userData = await getUserTableDataByTimestamp(
-      userId,
-      selectedTimeStamp
-    ).then((result) => {
-      return result;
-    });
-    return userData;
+    if (userId) {
+      const userData = await getUserTableDataByTimestamp(
+        userId,
+        selectedTimeStamp
+      ).then((result) => {
+        return result;
+      });
+
+      return userData;
+    }
   };
 
   const handleDateChange = (date) => {
-    debugger;
-    if (date) {
-      const currentDate = moment(date).format('M:YYYY');
-      const newDate = currentDate.split(':').join('');
-      setSelectedTimeStamp(newDate);
-      setSelectedDate(date);
-    } else {
-      const currentDate = moment().format('M:YYYY');
-      const newDate = currentDate.split(':').join('');
-      setSelectedTimeStamp(newDate);
-      setSelectedDate(currentDate);
-    }
+    const currentDate = moment(date).format('M:YYYY');
+    const newDate = currentDate.split(':').join('');
+    setSelectedTimeStamp(newDate);
+    setSelectedDate(date);
+
     console.log(selectedTimeStamp);
   };
 
