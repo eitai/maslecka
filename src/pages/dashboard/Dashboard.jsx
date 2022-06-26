@@ -47,9 +47,11 @@ const Dashboard = () => {
   };
 
   const handleDateChange = (date) => {
+    debugger;
     if (date) {
-      const newDate = Date.parse(date);
-      setSelectedTimeStamp(newDate / 1000);
+      const currentDate = moment(date).format('M:YYYY');
+      const newDate = currentDate.split(':').join('');
+      setSelectedTimeStamp(newDate);
       setSelectedDate(date);
     } else {
       const currentDate = moment().format('M:YYYY');
