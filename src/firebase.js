@@ -16,6 +16,7 @@ import {
   collection,
   getDocs,
 } from 'firebase/firestore';
+import moment from 'moment';
 
 import { initializeApp } from 'firebase/app';
 import {
@@ -73,6 +74,7 @@ const signInUserWithEmailAndPassword = (email, password) => {
 };
 
 const saveNewTimeStamp = async (uid, timestamp, updatedTable) => {
+  console.log('save ne timestamp run');
   const userDocRef = db
     .collection(`tables/${uid}/timestamp`)
     .doc(`${timestamp}`);
@@ -92,11 +94,12 @@ const saveNewTimeStamp = async (uid, timestamp, updatedTable) => {
       await updateDoc(userDocRef, tableUpdatedData);
     } catch (e) {}
   }
-  console.log(userDocRef);
+
   return userDocRef;
 };
 
 const getUserTableDataByTimestamp = async (uid, timestamp) => {
+  console.log('get user data run firebase');
   const userDocRef = db
     .collection(`tables/${uid}/timestamp`)
     .doc(`${timestamp}`);
@@ -104,13 +107,20 @@ const getUserTableDataByTimestamp = async (uid, timestamp) => {
   const userSnapShot = await getDoc(userDocRef);
   console.log(userSnapShot.exists());
   if (!userSnapShot.exists()) {
-    saveNewTimeStamp(uid, timestamp);
-    getUserTableDataByTimestamp(uid, timestamp);
+    const currentDateMoment = moment().format('M:YYYY');
+    const newDate = currentDateMoment.split(':').join('');
+    let currentTimeStamp = timestamp ? timestamp : newDate;
+    await saveNewTimeStamp(uid, currentTimeStamp);
+    setTimeout(() => {
+      getUserTableDataByTimestamp(uid, currentTimeStamp);
+    }, 1000);
   } else {
     const userdata = await getDoc(userDocRef).then((timestampData) => {
       const data = timestampData.data();
+
       return data;
     });
+
     return userdata;
   }
 };

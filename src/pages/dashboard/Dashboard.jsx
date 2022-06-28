@@ -22,10 +22,12 @@ const Dashboard = () => {
   const [selectedTimeStamp, setSelectedTimeStamp] = useState(null);
   const [loading, setLoading] = useState(false);
   const userId = useSelector((state) => state.user.user.uid);
+  const [dataArrived, setDataArrived] = useState(false);
 
   useEffect(() => {
     const currentDateMoment = moment().format('M:YYYY');
     const newDate = currentDateMoment.split(':').join('');
+    console.log('timestemp set');
     setSelectedTimeStamp(newDate);
     const jsDate = new Date();
     setSelectedDate(jsDate);
@@ -33,34 +35,20 @@ const Dashboard = () => {
 
   useEffect(() => {
     setLoading(true);
+    async function fetchData() {
+      const data = await getUserTableDataByTimestamp(userId, selectedTimeStamp);
+      setDataArrived(false);
 
-    userDatabyTimestamp().then((data) => {
-      if (data !== undefined) {
-        console.log(data.timestamp);
-        setTables(
-          data.timestamp.map((table) => ({
-            ...table,
-            id: uuid(),
-          }))
-        );
-      }
-    });
-
-    setLoading(false);
-  }, [selectedTimeStamp]);
-
-  const userDatabyTimestamp = async () => {
-    if (userId) {
-      const userData = await getUserTableDataByTimestamp(
-        userId,
-        selectedTimeStamp
-      ).then((result) => {
-        return result;
-      });
-
-      return userData;
+      const tablesWithId = data?.timestamp.map((table) => ({
+        ...table,
+        id: uuid(),
+      }));
+      setTables(tablesWithId);
+      setDataArrived(true);
+      setLoading(false);
     }
-  };
+    fetchData();
+  }, [selectedTimeStamp, dataArrived]);
 
   const handleDateChange = (date) => {
     const currentDate = moment(date).format('M:YYYY');
@@ -72,7 +60,7 @@ const Dashboard = () => {
   };
 
   const tablesChartData = useMemo(() => {
-    const datasets = tables.map((category, index) => {
+    const datasets = tables?.map((category, index) => {
       const rowData = category.rows
         .map((row) => {
           const amout = row.amount;
@@ -92,20 +80,16 @@ const Dashboard = () => {
         }, 0);
       return rowData;
     });
-
-    const labels = tables.map((label) => {
+    const labels = tables?.map((label) => {
       return label.title;
     });
-
     const data = {
       labels: labels,
       datasets: { labels: labels, data: datasets },
     };
-
     return data;
   }, [tables]);
   if (loading) return;
-
   const handleRemoveTable = (event, index) => {
     event.preventDefault();
     const tempTable = [...tables];
@@ -119,7 +103,9 @@ const Dashboard = () => {
     setTables(newTables);
     console.log(newTables);
     saveNewTimeStamp(userId, selectedTimeStamp, newTables);
+    console.log('usecallback run');
   };
+
   const handleRemoveUpdate = (event, index) => {
     const newTables = [...tables];
     newTables[index].rows = event;
@@ -145,6 +131,7 @@ const Dashboard = () => {
   const handleOpenAddTableModal = (e) => {
     setOpenAddTableModal(true);
   };
+  console.log(loading);
 
   return (
     <div>
@@ -181,19 +168,20 @@ const Dashboard = () => {
         </div>
         <div className={Style.main_container}>
           <div className={Style.categories_container}>
-            {tables?.map((table, index, arr) => {
-              return (
-                <Category
-                  key={table.id}
-                  data={table}
-                  test={UserMock}
-                  handleRemoveTable={handleRemoveTable}
-                  tableIndex={index}
-                  handleRowUpdate={handleRowUpdate}
-                  test2={handleRemoveUpdate}
-                />
-              );
-            })}
+            {tables &&
+              tables?.map((table, index, arr) => {
+                return (
+                  <Category
+                    key={table.id}
+                    data={table}
+                    test={UserMock}
+                    handleRemoveTable={handleRemoveTable}
+                    tableIndex={index}
+                    handleRowUpdate={handleRowUpdate}
+                    test2={handleRemoveUpdate}
+                  />
+                );
+              })}
           </div>
           <div className={Style.graph_container}>
             <div className={Style.graph_bars}>
