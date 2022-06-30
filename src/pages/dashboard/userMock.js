@@ -1,21 +1,23 @@
 export const UserMock = [
   {
     title: 'דיור',
+    isLocked: true,
     rows: [
-      { expense: 'קבוע', kind: 'שכירות', amount: 0 },
-      { expense: 'קבוע', kind: 'ארנונה', amount: 0 },
-      { expense: 'משתנה', kind: 'מיםביוב', amount: 0 },
-      { expense: 'קבוע', kind: 'חשמל', amount: 0 },
-      { expense: 'קבוע', kind: 'גז', amount: 0 },
-      { expense: 'קבוע', kind: 'ועוד בית', amount: 0 },
-      { expense: 'קבוע', kind: 'ניקון וגינון', amount: 0 },
-      { expense: 'קבוע', kind: 'אחזקה ותיקונים', amount: 0 },
-      { expense: 'קבוע', kind: 'רכישות לבית', amount: 0 },
-      { expense: 'קבוע', kind: 'ביטוח דירה', amount: 0 },
+      { expense: 'קבוע', kind: 'שכירות', amount: '' },
+      { expense: 'קבוע', kind: 'ארנונה', amount: '' },
+      { expense: 'משתנה', kind: 'מיםביוב', amount: '' },
+      { expense: 'קבוע', kind: 'חשמל', amount: '' },
+      { expense: 'קבוע', kind: 'גז', amount: '' },
+      { expense: 'קבוע', kind: 'ועוד בית', amount: '' },
+      { expense: 'קבוע', kind: 'ניקון וגינון', amount: '' },
+      { expense: 'קבוע', kind: 'אחזקה ותיקונים', amount: '' },
+      { expense: 'קבוע', kind: 'רכישות לבית', amount: '' },
+      { expense: 'קבוע', kind: 'ביטוח דירה', amount: '' },
     ],
   },
   {
     title: 'תקשורת',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'טלויזיה', amount: '' },
       { expense: 'קבוע', kind: 'אינטרנט', amount: '' },
@@ -24,6 +26,7 @@ export const UserMock = [
   },
   {
     title: 'מזון וקניות',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'מזון', amount: '' },
       { expense: 'קבוע', kind: 'חומרי ניקוי וטואלטיקה', amount: '' },
@@ -35,6 +38,7 @@ export const UserMock = [
   },
   {
     title: 'טיפוח',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'קוסמטיקאית', amount: '' },
       { expense: 'קבוע', kind: 'איפור ובישום', amount: '' },
@@ -43,6 +47,7 @@ export const UserMock = [
   },
   {
     title: 'ביגוד',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'בגדים', amount: '' },
       { expense: 'קבוע', kind: 'נעליים', amount: '' },
@@ -51,6 +56,7 @@ export const UserMock = [
   },
   {
     title: 'רכב ונסיעות',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'דלקליסינג', amount: '' },
       { expense: 'קבוע', kind: 'טיפולים ותיקונים', amount: '' },
@@ -64,6 +70,7 @@ export const UserMock = [
   },
   {
     title: 'ילדים וחינוך',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'גנים', amount: '' },
       { expense: 'קבוע', kind: 'צהרון', amount: '' },
@@ -79,6 +86,7 @@ export const UserMock = [
   },
   {
     title: 'פנאי ותחביבים',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'חופשות וטיולים,חו"ל', amount: '' },
       { expense: 'קבוע', kind: 'מסעדות', amount: '' },
@@ -94,6 +102,7 @@ export const UserMock = [
   },
   {
     title: 'בריאות',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'קופ"ח,שב"ן,סיעודי', amount: '' },
       { expense: 'קבוע', kind: 'ביטוח בריאות פרטי,סיעודי פרטי', amount: '' },
@@ -106,6 +115,7 @@ export const UserMock = [
   },
   {
     title: 'ביטוחים ופיננסים',
+    isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'ביטוח חיים א.כ.ע', amount: '' },
       { expense: 'קבוע', kind: 'יעוץ מקצועי', amount: '' },
@@ -114,9 +124,3 @@ export const UserMock = [
     ],
   },
 ];
-/*
-1675213200;
-1685577600;
-1651363200
-1682899200
-*/

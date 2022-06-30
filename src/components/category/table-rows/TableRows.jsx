@@ -10,7 +10,7 @@ const customStyles = {
   }),
 };
 
-const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
+const TableRows = ({ rowsData, deleteTableRows, handleChange, isLocked }) => {
   return rowsData.map((data, index) => {
     const { kind, amount } = data;
 
@@ -34,8 +34,8 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
         <td>
           <input
             type='text'
-            value={kind}
-            onChange={(evnt) => handleChange(index, evnt)}
+            defaultValue={kind}
+            onBlur={(evnt) => handleChange(index, evnt)}
             name='kind'
             className='form-control'
           />{' '}
@@ -43,20 +43,24 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange }) => {
         <td>
           <input
             type='text'
-            value={amount}
-            onChange={(evnt) => handleChange(index, evnt)}
+            onBlur={(evnt) => handleChange(index, evnt)}
             name='amount'
+            defaultValue={amount}
             className='form-control'
             placeholder='סכום בשקלים'
-          />{' '}
+          />
         </td>
         <td>
-          <button
-            className='btn btn-outline-danger'
-            onClick={() => deleteTableRows(index)}
-          >
-            x
-          </button>
+          {!isLocked ? (
+            <button
+              className='btn btn-outline-danger'
+              onClick={() => deleteTableRows(index)}
+            >
+              x
+            </button>
+          ) : (
+            <button className={`btn  ${Style.btn_disable}`}>x</button>
+          )}
         </td>
       </tr>
     );

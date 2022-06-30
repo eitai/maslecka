@@ -14,6 +14,7 @@ import { he } from 'date-fns/locale';
 import { saveNewTimeStamp, getUserTableDataByTimestamp } from '../../firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
+import _ from 'lodash';
 
 const Dashboard = () => {
   const [tables, setTables] = useState([]);
@@ -23,11 +24,11 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const userId = useSelector((state) => state.user.user.uid);
   const [dataArrived, setDataArrived] = useState(false);
+  const [labels, setLabels] = useState();
 
   useEffect(() => {
     const currentDateMoment = moment().format('M:YYYY');
     const newDate = currentDateMoment.split(':').join('');
-    console.log('timestemp set');
     setSelectedTimeStamp(newDate);
     const jsDate = new Date();
     setSelectedDate(jsDate);
@@ -38,7 +39,6 @@ const Dashboard = () => {
     async function fetchData() {
       const data = await getUserTableDataByTimestamp(userId, selectedTimeStamp);
       setDataArrived(false);
-
       const tablesWithId = data?.timestamp.map((table) => ({
         ...table,
         id: uuid(),
@@ -48,14 +48,25 @@ const Dashboard = () => {
       setLoading(false);
     }
     fetchData();
-  }, [selectedTimeStamp, dataArrived]);
+  }, [dataArrived]);
 
-  const handleDateChange = (date) => {
+  const handleDateChange = async (date) => {
+    setLoading(true);
     const currentDate = moment(date).format('M:YYYY');
     const newDate = currentDate.split(':').join('');
     setSelectedTimeStamp(newDate);
     setSelectedDate(date);
+    const data = await getUserTableDataByTimestamp(userId, newDate);
+    if (!data || data === undefined) {
+      handleDateChange(date);
+    }
+    const tablesWithId = data?.timestamp.map((table) => ({
+      ...table,
+      id: uuid(),
+    }));
 
+    setTables(tablesWithId);
+    setLoading(false);
     console.log(selectedTimeStamp);
   };
 
@@ -67,19 +78,17 @@ const Dashboard = () => {
           return amout;
         })
         .reduce((pv, cv) => {
-          if (cv === '') {
-            cv = 0;
-            const prev = parseInt(cv);
-
-            return prev + cv;
+          if (_.isNumber(pv) && _.isNumber(cv)) {
+            return pv + cv;
           } else {
-            const prev = parseInt(pv);
-            const curr = parseInt(cv);
+            const prev = _.toNumber(pv);
+            const curr = _.toNumber(cv);
             return prev + curr;
           }
         }, 0);
       return rowData;
     });
+
     const labels = tables?.map((label) => {
       return label.title;
     });
@@ -87,8 +96,10 @@ const Dashboard = () => {
       labels: labels,
       datasets: { labels: labels, data: datasets },
     };
+    setLabels(data);
     return data;
   }, [tables]);
+
   if (loading) return;
   const handleRemoveTable = (event, index) => {
     event.preventDefault();
@@ -178,7 +189,7 @@ const Dashboard = () => {
                     handleRemoveTable={handleRemoveTable}
                     tableIndex={index}
                     handleRowUpdate={handleRowUpdate}
-                    test2={handleRemoveUpdate}
+                    handleRemoveUpdate={handleRemoveUpdate}
                   />
                 );
               })}

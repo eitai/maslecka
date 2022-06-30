@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
+import _ from 'lodash';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,7 +21,11 @@ ChartJS.register(
 );
 
 const BarsChart = ({ tablesData }) => {
-  const labels = tablesData.labels;
+  const [labels, setLabels] = useState('');
+
+  useEffect(() => {
+    setLabels(tablesData.labels);
+  }, [tablesData]);
 
   const data = {
     labels,
@@ -35,7 +40,7 @@ const BarsChart = ({ tablesData }) => {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)',
         ],
-        maxBarThickness: 20,
+        maxBarThickness: 25,
       },
     ],
   };
