@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/homePage/homePage';
 import Dashboard from './pages/dashboard/Dashboard';
+import AboutUs from './pages/about-us/AboutUs';
+import Articles from './pages/articles/Articles';
+import ContactUs from './pages/contact-us/ContactUs';
+import SaveNow from './pages/save-now/SaveNow';
+import DemoPage from './pages/demo-page/DemoPage';
 import RequireAuth from './components/requireAuth/RequireAuth';
-import { Routes, Route, Navigate } from 'react-router-dom';
-// import '@coreui/coreui/dist/css/coreui.min.css';
 
-import Test from '../src/pages/test';
+// import '@coreui/coreui/dist/css/coreui.min.css';
+// import Test from '../src/pages/test';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from './store/userSlice';
-
 import { auth, onAuthStateChanged, signOutUser } from './firebase';
 
 const App = () => {
@@ -42,7 +47,7 @@ const App = () => {
     <>
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path='test' element={<Test />} />
+        {/* <Route path='test' element={<Test />} /> */}
 
         <Route
           path='dashboard'
@@ -52,6 +57,11 @@ const App = () => {
             // </RequireAuth>
           }
         />
+        <Route path='about-us' element={<AboutUs />} />
+        <Route path='articles' element={<Articles />} />
+        <Route path='contact-us' element={<ContactUs />} />
+        <Route path='save-now' element={<SaveNow />} />
+        <Route path='demo-page' element={<DemoPage />} />
         <Route path='dashboard' element={<Dashboard />} />
       </Routes>
     </>

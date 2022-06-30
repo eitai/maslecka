@@ -31,7 +31,10 @@ const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
           <button className={Style.btn} onClick={handleLogout}>
             התנתק
           </button>
-          <span>{`ברוך הבא ${user} `}</span>
+          <div className={Style.welcome_container}>
+            <div>{`ברוך הבא`}</div>
+            <div>{user}</div>
+          </div>
         </div>
       ) : (
         <button
@@ -53,10 +56,10 @@ const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
         <NavLink to='/articles' onClick={handleStyleEffects}>
           כתבות
         </NavLink>
-        <NavLink to='save-now' onClick={handleStyleEffects}>
+        <NavLink to='/save-now' onClick={handleStyleEffects}>
           חסכו עכשיו
         </NavLink>
-        <NavLink to='contact' onClick={handleStyleEffects}>
+        <NavLink to='/contact-us' onClick={handleStyleEffects}>
           צור קשר
         </NavLink>
       </div>

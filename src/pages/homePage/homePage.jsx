@@ -132,21 +132,6 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-          <div className={Style.services_title_container}>
-            <span className={Style.services_subtitle}> ? </span>
-            <span className={Style.services_title}> רוצים לחסוך </span>
-            <span className={Style.services_subtitle}> כבר עכשיו </span>
-          </div>
-          <div className={Style.services}>
-            <button className={`${Style.service} ${Style.service_1}`}>
-              <div className={Style.service_text}>לחצו</div>
-              <span className={Style.service_text}> כדי לחסוך בביטוחים</span>
-            </button>
-            <button className={`${Style.service} ${Style.service_2}`}>
-              <div className={Style.service_text}>לחצו</div>
-              <span className={Style.service_text}>לייעוץ פנסיוני</span>
-            </button>
-          </div>
         </div>
         <Footer />
       </div>
