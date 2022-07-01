@@ -62,7 +62,6 @@ const signInUserWithEmailAndPassword = (email, password) => {
 };
 
 const saveNewTimeStamp = async (uid, timestamp, updatedTable) => {
-  console.log('save ne timestamp run');
   const userDocRef = db
     .collection(`tables/${uid}/timestamp`)
     .doc(`${timestamp}`);
@@ -93,7 +92,6 @@ const getUserTableDataByTimestamp = async (uid, timestamp) => {
     .doc(`${timestamp}`);
 
   const userSnapShot = await getDoc(userDocRef);
-  console.log(userSnapShot.exists());
   if (!userSnapShot.exists()) {
     const currentDateMoment = moment().format('M:YYYY');
     const newDate = currentDateMoment.split(':').join('');

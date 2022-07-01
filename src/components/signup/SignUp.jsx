@@ -38,7 +38,7 @@ const SignUp = ({ closeForm, setIsSignIn }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
-
+  console.log(errors);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

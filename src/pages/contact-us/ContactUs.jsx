@@ -6,15 +6,18 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { GiSplitArrows } from 'react-icons/gi';
+
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email('נא להכניס אימייל').required(),
-  password: yup
+  fullname: yup.string('נא להכניס שם מלא').required('נא להכניס שם מלא'),
+  email: yup.string().email('נא להכניס אימייל').required('יש למלא אימייל'),
+  phone: yup
     .string()
-    .min(4, 'נא להכניס סיסמא של 4-20 תווים')
-    .max(20)
-    .required(),
-  confirmPassword: yup.string().required(),
+    .matches(phoneRegExp, 'יש להכניס טלפון')
+    .required('יש למלא טלפון'),
 });
 
 const inputStyle = {
@@ -22,23 +25,28 @@ const inputStyle = {
   mb: 3,
 };
 
-const inputStyleTextArea = {
-  width: '100%',
-  height: '20rem',
-  mb: 3,
-};
-
 const ContactUs = () => {
   const [mainImg, setMainImg] = useState(1);
+  const [subject, setSubject] = useState('כללי');
   const [email, setEmail] = useState('');
-  const [isError, setIsError] = useState(false);
-  const [currentError, setCurrentError] = useState('');
+  const [phone, setPhone] = useState('');
+  const [textArea, setTextArea] = useState('');
+
   const [name, setName] = useState('');
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
+
+  const handleSubject = (imgNum, subject) => {
+    setMainImg(imgNum);
+    setSubject(subject);
+  };
+
+  const handleFormSubmit = () => {
+    debugger;
+  };
 
   return (
     <div>
@@ -55,24 +63,23 @@ const ContactUs = () => {
           <div className={Style.form_container}>
             <form
               className={Style.form}
-              // onSubmit={handleSubmit(handleFormSubmit)}
+              onSubmit={handleSubmit(handleFormSubmit)}
             >
               <TextField
-                error={errors?.name}
+                error={errors?.fullname}
                 id='fullWidth'
                 label='שם מלא'
-                helperText={errors?.name}
-                דפ
-                {...register('name')}
+                helperText={errors.fullname ? errors.fullname.message : ''}
+                {...register('fullname')}
                 className={Style.input}
                 size='small'
                 sx={inputStyle}
                 onChange={(e) => setName(e.target.value)}
               />
               <TextField
-                error={errors?.lastname}
+                error={errors?.email}
                 label='אימייל'
-                helperText={errors?.name}
+                helperText={errors.email ? errors.email.message : ''}
                 {...register('email')}
                 className={Style.input}
                 size='small'
@@ -80,13 +87,15 @@ const ContactUs = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
-                error={errors.confirmPassword}
+                error={errors.phone}
                 label='טלפון'
                 type='text'
                 className={Style.input}
+                helperText={errors.phone ? errors.phone.message : ''}
                 size='small'
                 sx={inputStyle}
-                // onChange={(e) => setConfirmPassword(e.target.value)}
+                {...register('phone')}
+                onChange={(e) => setPhone(e.target.value)}
               />
               <TextareaAutosize
                 maxRows={4}
@@ -95,20 +104,19 @@ const ContactUs = () => {
                 style={{
                   width: '25rem',
                   border: '1px solid rgba(0, 0, 0, 0.23)',
-                  height: 150,
+                  height: 70,
                   display: 'block',
                   marginBottom: '15px',
                   color: 'rgba(0, 0, 0, 0.6)',
                   paddingRight: '10px',
                 }}
+                onChange={(e) => setTextArea(e.target.value)}
               />
               <input type='submit' value='שלח' className={Style.btn_signup} />
-              {isError && (
-                <div className={Style.error_password}>{currentError}</div>
-              )}
             </form>
-
             <div className={Style.img_container}>
+              <span className={Style.img_title}> בחרתם ב - </span>
+              <span className={Style.img_subtitle}> {subject}</span>
               <img
                 src={require(`../../assets/contactus${mainImg}.jpg`)}
                 alt='logo'
@@ -116,39 +124,59 @@ const ContactUs = () => {
               />
             </div>
           </div>
+          <div className={Style.subtitle}>
+            <span>בחרו נושא פנייה</span>
+            <div className={Style.icon}>
+              <GiSplitArrows />
+            </div>
+          </div>
           <div className={Style.choice_section}>
             <div className={Style.line}></div>
-            <div className={Style.box}>
+
+            <button
+              className={Style.box}
+              onClick={() => handleSubject(1, 'ביטוח')}
+            >
+              <span className={Style.box_text}>ביטוח</span>
+              <img
+                src={require('../../assets/contactus1.jpg')}
+                alt='logo'
+                className={Style.img}
+              />
+            </button>
+            <button
+              className={Style.box}
+              onClick={() => handleSubject(2, 'ביטוח')}
+            >
+              <span className={Style.box_text}>ביטוח</span>
               <img
                 src={require('../../assets/contactus2.jpg')}
                 alt='logo'
                 className={Style.img}
               />
-            </div>
-            <div className={Style.box}>
-              {' '}
-              <img
-                src={require('../../assets/contactus2.jpg')}
-                alt='logo'
-                className={Style.img}
-              />
-            </div>
-            <div className={Style.box}>
-              {' '}
+            </button>
+            <button
+              className={Style.box}
+              onClick={() => handleSubject(3, 'חיסכון')}
+            >
+              <span className={Style.box_text}>חיסכון</span>
               <img
                 src={require('../../assets/contactus3.jpg')}
                 alt='logo'
                 className={Style.img}
               />
-            </div>
-            <div className={Style.box}>
-              {' '}
+            </button>
+            <button
+              className={Style.box}
+              onClick={() => handleSubject(4, 'פנסיה')}
+            >
+              <span className={Style.box_text}>פנסיה</span>
               <img
                 src={require('../../assets/contactus4.jpg')}
                 alt='logo'
                 className={Style.img}
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>
