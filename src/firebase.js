@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { UserMock } from './pages/dashboard/userMock';
 
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/compat/app';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
 
 import { initializeApp } from 'firebase/app';
