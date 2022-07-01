@@ -2,6 +2,7 @@
   "name": "maslecka",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
   "dependencies": {
     "@date-io/date-fns": "1.x",
     "@emotion/cache": "^11.9.3",
