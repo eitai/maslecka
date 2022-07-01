@@ -27,7 +27,7 @@ button {
 }
 .MuiOutlinedInput-root {
   .muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline {
-    border: unset;
+    // border: unset;
     cursor: pointer;
   }
 }
@@ -46,14 +46,14 @@ button {
   cursor: pointer;
 }
 
-.MuiFormControl-root {
-  .MuiFormLabel-colorPrimary {
-    color: #fff;
-  }
-  .muirtl-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: transparent;
-  }
-  .MuiFormLabel-filled {
-    color: transparent;
-  }
-}
+// .MuiFormControl-root {
+//   .MuiFormLabel-colorPrimary {
+//     color: #fff;
+//   }
+//   .muirtl-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+//     color: transparent;
+//   }
+//   .MuiFormLabel-filled {
+//     color: transparent;
+//   }
+// }

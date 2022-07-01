@@ -1,8 +1,25 @@
 .main_container {
   background-color: rgba(54, 162, 235, 0.2);
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .container {
   background-color: #fff;
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  box-shadow: var(--box-shadow-soft);
+  padding: 1rem;
+}
+.title_container {
+  font-size: 20px;
+}
+.title {
+}
+.title_part {
+  color: var(--orangeColor);
+  text-decoration: underline;
 }
