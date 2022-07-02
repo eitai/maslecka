@@ -25,6 +25,10 @@ const inputStyle = {
   mb: 3,
 };
 
+const sgEmail = require('@sendgrid/mail').config(process.env.SMTP_KEY);
+sgEmail.setApiKey(
+  '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'
+);
 const ContactUs = () => {
   const [mainImg, setMainImg] = useState(1);
   const [subject, setSubject] = useState('כללי');
