@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { GiSplitArrows } from 'react-icons/gi';
+import sendMail from '../../components/mail/Mail';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -25,10 +26,6 @@ const inputStyle = {
   mb: 3,
 };
 
-const sgEmail = require('@sendgrid/mail').config(process.env.SMTP_KEY);
-sgEmail.setApiKey(
-  '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'
-);
 const ContactUs = () => {
   const [mainImg, setMainImg] = useState(1);
   const [subject, setSubject] = useState('כללי');
@@ -49,6 +46,13 @@ const ContactUs = () => {
   };
 
   const handleFormSubmit = () => {
+    const userMessage = {
+      fullName: name,
+      email: email,
+      phone: phone,
+      textArea: textArea,
+    };
+    sendMail(userMessage);
     debugger;
   };
 
