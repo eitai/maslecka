@@ -53,7 +53,6 @@ const ContactUs = () => {
       textArea: textArea,
     };
     sendMail(userMessage);
-    debugger;
   };
 
   return (

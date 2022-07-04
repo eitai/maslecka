@@ -2,7 +2,7 @@ import React from 'react';
 
 const sgmail = require('@sendgrid/mail');
 sgmail.setApiKey(
-  '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'
+  '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'
 );
 
 const sendMail = (req, res) => {
