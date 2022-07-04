@@ -1,39 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import Style from './contactUs.module.scss';
-import Navbar from '../../components/navbar/Navbar';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import TextField from '@mui/material/TextField';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { GiSplitArrows } from 'react-icons/gi';
-import sendMail from '../../components/mail/Mail';
+import React, { useState, useEffect } from "react";
+import Style from "./contactUs.module.scss";
+import Navbar from "../../components/navbar/Navbar";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import TextField from "@mui/material/TextField";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { GiSplitArrows } from "react-icons/gi";
+import sendMail from "../../components/mail/Mail";
+import emailjs from "emailjs-com";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const validationSchema = yup.object().shape({
-  fullname: yup.string('נא להכניס שם מלא').required('נא להכניס שם מלא'),
-  email: yup.string().email('נא להכניס אימייל').required('יש למלא אימייל'),
+  fullname: yup.string("נא להכניס שם מלא").required("נא להכניס שם מלא"),
+  email: yup.string().email("נא להכניס אימייל").required("יש למלא אימייל"),
   phone: yup
     .string()
-    .matches(phoneRegExp, 'יש להכניס טלפון')
-    .required('יש למלא טלפון'),
+    .matches(phoneRegExp, "יש להכניס טלפון")
+    .required("יש למלא טלפון"),
 });
 
 const inputStyle = {
-  width: '100%',
+  width: "100%",
   mb: 3,
 };
 
 const ContactUs = () => {
   const [mainImg, setMainImg] = useState(1);
-  const [subject, setSubject] = useState('כללי');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [textArea, setTextArea] = useState('');
+  const [subject, setSubject] = useState("כללי");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [textArea, setTextArea] = useState("");
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const {
     register,
     handleSubmit,
@@ -45,6 +46,27 @@ const ContactUs = () => {
     setSubject(subject);
   };
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_0odnifl",
+        "template_zvo8jcv",
+        e.target,
+        "W3X5htmqPpEq8lGi_"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+  };
+
   const handleFormSubmit = () => {
     const userMessage = {
       fullName: name,
@@ -52,7 +74,8 @@ const ContactUs = () => {
       phone: phone,
       textArea: textArea,
     };
-    sendMail(userMessage);
+    // sendMail(userMessage);
+    sendEmail();
   };
 
   return (
@@ -74,59 +97,63 @@ const ContactUs = () => {
             >
               <TextField
                 error={errors?.fullname}
-                id='fullWidth'
-                label='שם מלא'
-                helperText={errors.fullname ? errors.fullname.message : ''}
-                {...register('fullname')}
+                id="fullWidth"
+                label="שם מלא"
+                helperText={errors.fullname ? errors.fullname.message : ""}
+                {...register("fullname")}
                 className={Style.input}
-                size='small'
+                size="small"
                 sx={inputStyle}
+                name="fullName"
                 onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 error={errors?.email}
-                label='אימייל'
-                helperText={errors.email ? errors.email.message : ''}
-                {...register('email')}
+                label="אימייל"
+                helperText={errors.email ? errors.email.message : ""}
+                {...register("email")}
                 className={Style.input}
-                size='small'
+                size="small"
                 sx={inputStyle}
+                name="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 error={errors.phone}
-                label='טלפון'
-                type='text'
+                label="טלפון"
+                type="text"
                 className={Style.input}
-                helperText={errors.phone ? errors.phone.message : ''}
-                size='small'
+                helperText={errors.phone ? errors.phone.message : ""}
+                size="small"
                 sx={inputStyle}
-                {...register('phone')}
+                name="phone"
+                {...register("phone")}
                 onChange={(e) => setPhone(e.target.value)}
               />
               <TextareaAutosize
                 maxRows={4}
-                aria-label='maximum height'
-                placeholder='שתפו אותנו'
+                aria-label="maximum height"
+                placeholder="שתפו אותנו"
+                name="textArea"
                 style={{
-                  width: '25rem',
-                  border: '1px solid rgba(0, 0, 0, 0.23)',
+                  width: "25rem",
+                  border: "1px solid rgba(0, 0, 0, 0.23)",
                   height: 70,
-                  display: 'block',
-                  marginBottom: '15px',
-                  color: 'rgba(0, 0, 0, 0.6)',
-                  paddingRight: '10px',
+                  display: "block",
+                  marginBottom: "15px",
+                  color: "rgba(0, 0, 0, 0.6)",
+                  paddingRight: "10px",
                 }}
                 onChange={(e) => setTextArea(e.target.value)}
               />
-              <input type='submit' value='שלח' className={Style.btn_signup} />
+              <input type="submit" value="שלח" className={Style.btn_signup} />
             </form>
             <div className={Style.img_container}>
               <span className={Style.img_title}> בחרתם ב - </span>
               <span className={Style.img_subtitle}> {subject}</span>
               <img
                 src={require(`../../assets/contactus${mainImg}.jpg`)}
-                alt='logo'
+                alt="logo"
                 className={Style.img}
               />
             </div>
@@ -142,45 +169,45 @@ const ContactUs = () => {
 
             <button
               className={Style.box}
-              onClick={() => handleSubject(1, 'ביטוח')}
+              onClick={() => handleSubject(1, "ביטוח")}
             >
               <span className={Style.box_text}>ביטוח</span>
               <img
-                src={require('../../assets/contactus1.jpg')}
-                alt='logo'
+                src={require("../../assets/contactus1.jpg")}
+                alt="logo"
                 className={Style.img}
               />
             </button>
             <button
               className={Style.box}
-              onClick={() => handleSubject(2, 'ביטוח')}
+              onClick={() => handleSubject(2, "ביטוח")}
             >
               <span className={Style.box_text}>ביטוח</span>
               <img
-                src={require('../../assets/contactus2.jpg')}
-                alt='logo'
+                src={require("../../assets/contactus2.jpg")}
+                alt="logo"
                 className={Style.img}
               />
             </button>
             <button
               className={Style.box}
-              onClick={() => handleSubject(3, 'חיסכון')}
+              onClick={() => handleSubject(3, "חיסכון")}
             >
               <span className={Style.box_text}>חיסכון</span>
               <img
-                src={require('../../assets/contactus3.jpg')}
-                alt='logo'
+                src={require("../../assets/contactus3.jpg")}
+                alt="logo"
                 className={Style.img}
               />
             </button>
             <button
               className={Style.box}
-              onClick={() => handleSubject(4, 'פנסיה')}
+              onClick={() => handleSubject(4, "פנסיה")}
             >
               <span className={Style.box_text}>פנסיה</span>
               <img
-                src={require('../../assets/contactus4.jpg')}
-                alt='logo'
+                src={require("../../assets/contactus4.jpg")}
+                alt="logo"
                 className={Style.img}
               />
             </button>
