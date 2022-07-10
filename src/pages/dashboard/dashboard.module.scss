@@ -78,3 +78,31 @@
 .tableColor {
   background-color: rgba(54, 162, 235, 0.8);
 }
+.total_Main_container {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+  margin-top: 15rem;
+  border-bottom: 1px solid #7777;
+  border-top: 1px solid #7777;
+  padding: 2rem 0;
+}
+.total_container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.nis {
+  font-size: 12px;
+}
+.total {
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

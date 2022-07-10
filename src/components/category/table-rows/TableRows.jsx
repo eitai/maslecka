@@ -34,7 +34,7 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange, isLocked }) => {
         <td>
           <input
             type='text'
-            defaultValue={kind}
+            defaultValue={kind ? kind : ''}
             onBlur={(evnt) => handleChange(index, evnt)}
             name='kind'
             className='form-control'
@@ -45,7 +45,7 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange, isLocked }) => {
             type='text'
             onBlur={(evnt) => handleChange(index, evnt)}
             name='amount'
-            defaultValue={amount}
+            defaultValue={amount ? amount : ''}
             className='form-control'
             placeholder='סכום בשקלים'
           />

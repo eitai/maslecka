@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { UserMock } from './pages/dashboard/userMock';
-
+import { incomeMock } from './components/incomeCharts/incomeMock';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import moment from 'moment';
 
@@ -112,7 +112,6 @@ const getUserTableDataByTimestamp = async (uid, timestamp) => {
 };
 
 const getUserIncomeTableDataByTimestamp = async (uid, timestamp) => {
-  console.log('get user data run firebase');
   const userDocRef = db
     .collection(`incomeTables/${uid}/timestamp`)
     .doc(`${timestamp}`);
@@ -122,7 +121,7 @@ const getUserIncomeTableDataByTimestamp = async (uid, timestamp) => {
     const currentDateMoment = moment().format('M:YYYY');
     const newDate = currentDateMoment.split(':').join('');
     let currentTimeStamp = timestamp ? timestamp : newDate;
-    await saveNewTimeStamp(uid, currentTimeStamp);
+    await saveIncomeTablesNewTimeStamp(uid, currentTimeStamp);
     setTimeout(() => {
       getUserTableDataByTimestamp(uid, currentTimeStamp);
     }, 1000);
@@ -146,16 +145,20 @@ const saveIncomeTablesNewTimeStamp = async (uid, timestamp, updatedTable) => {
 
   if (!userSnapShot.exists()) {
     const mockdata = {};
-    mockdata.timestamp = UserMock;
+    mockdata.timestamp = incomeMock;
     try {
       await setDoc(userDocRef, mockdata);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   } else {
     const tableUpdatedData = {};
     tableUpdatedData.timestamp = updatedTable;
     try {
       await updateDoc(userDocRef, tableUpdatedData);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return userDocRef;

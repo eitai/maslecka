@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Category from '../../components/category/Category';
 import Style from './dashboard.module.scss';
-import { UserMock } from './userMock';
 import AddTable from '../../components/category/add-table/AddTable';
 import BarsChart from '../../components/charts/bars-chart/BarsChart';
 import DonatChat from '../../components/charts/donut-chart/DonutChart';
@@ -26,7 +25,11 @@ const Dashboard = () => {
   const userId = useSelector((state) => state.user.user.uid);
   const [dataArrived, setDataArrived] = useState(false);
   const [labels, setLabels] = useState();
-
+  const [incomeObj, setIncomeObj] = useState({
+    totalWoman: '',
+    totalMan: '',
+    total: '',
+  });
   useEffect(() => {
     const currentDateMoment = moment().format('M:YYYY');
     const newDate = currentDateMoment.split(':').join('');
@@ -177,9 +180,12 @@ const Dashboard = () => {
 
         <div className={Style.main_container}>
           <div className={Style.categories_container}>
-            {/* <div className={Style.income_container}>
-              <IncomeCharts selectedTimeStamp={selectedTimeStamp} />
-            </div> */}
+            <div className={Style.income_container}>
+              <IncomeCharts
+                selectedTimeStamp={selectedTimeStamp}
+                setIncomeObj={setIncomeObj}
+              />
+            </div>
 
             {tables &&
               tables?.map((table, index, arr) => {
@@ -197,6 +203,41 @@ const Dashboard = () => {
               })}
           </div>
           <div className={Style.graph_container}>
+            <div className={Style.total_Main_container}>
+              <div className={Style.total_container}>
+                <div className={Style.total}>
+                  <div>
+                    <span>הכנסות גבר</span>:<span> </span>
+                  </div>
+                  <div>
+                    {' '}
+                    <span>{incomeObj.totalMan}</span>
+                    <span className={Style.nis}>ש"ח </span>
+                  </div>
+                </div>
+                <div className={Style.total}>
+                  <div>
+                    <span> הכנסות אישה</span>:<span> </span>
+                  </div>
+                  <div>
+                    {' '}
+                    <span>{incomeObj.totalWoman}</span>
+                    <span className={Style.nis}>ש"ח </span>
+                  </div>
+                </div>
+              </div>
+              <div className={Style.total}>
+                <div>
+                  <span> סה"כ הכנסות:</span>
+                  <span> </span>
+                </div>
+                <div>
+                  <span>{incomeObj.total}</span>
+                  <span className={Style.nis}>ש"ח </span>
+                </div>
+              </div>
+            </div>
+
             <div className={Style.graph_bars}>
               <BarsChart tablesData={tablesChartData} />
             </div>
