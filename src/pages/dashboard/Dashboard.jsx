@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useId, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Category from '../../components/category/Category';
 import Style from './dashboard.module.scss';
@@ -12,9 +12,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { he } from 'date-fns/locale';
 import { saveNewTimeStamp, getUserTableDataByTimestamp } from '../../firebase';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
-import _ from 'lodash';
+import { isNumber, toNumber } from 'lodash';
+import IncomeCharts from '../../components/incomeCharts/IncomeCharts';
 
 const Dashboard = () => {
   const [tables, setTables] = useState([]);
@@ -67,7 +68,6 @@ const Dashboard = () => {
 
     setTables(tablesWithId);
     setLoading(false);
-    console.log(selectedTimeStamp);
   };
 
   const tablesChartData = useMemo(() => {
@@ -78,11 +78,11 @@ const Dashboard = () => {
           return amout;
         })
         .reduce((pv, cv) => {
-          if (_.isNumber(pv) && _.isNumber(cv)) {
+          if (isNumber(pv) && isNumber(cv)) {
             return pv + cv;
           } else {
-            const prev = _.toNumber(pv);
-            const curr = _.toNumber(cv);
+            const prev = toNumber(pv);
+            const curr = toNumber(cv);
             return prev + curr;
           }
         }, 0);
@@ -112,9 +112,7 @@ const Dashboard = () => {
     const newTables = [...tables];
     newTables[index].rows = event;
     setTables(newTables);
-    console.log(newTables);
     saveNewTimeStamp(userId, selectedTimeStamp, newTables);
-    console.log('usecallback run');
   };
 
   const handleRemoveUpdate = (event, index) => {
@@ -142,7 +140,6 @@ const Dashboard = () => {
   const handleOpenAddTableModal = (e) => {
     setOpenAddTableModal(true);
   };
-  console.log(loading);
 
   return (
     <div>
@@ -177,19 +174,24 @@ const Dashboard = () => {
             )}
           </div>
         </div>
+
         <div className={Style.main_container}>
           <div className={Style.categories_container}>
+            {/* <div className={Style.income_container}>
+              <IncomeCharts selectedTimeStamp={selectedTimeStamp} />
+            </div> */}
+
             {tables &&
               tables?.map((table, index, arr) => {
                 return (
                   <Category
                     key={table.id}
                     data={table}
-                    test={UserMock}
                     handleRemoveTable={handleRemoveTable}
                     tableIndex={index}
                     handleRowUpdate={handleRowUpdate}
                     handleRemoveUpdate={handleRemoveUpdate}
+                    tablesColorClass={Style.tableColor}
                   />
                 );
               })}

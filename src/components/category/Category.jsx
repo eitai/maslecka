@@ -8,9 +8,11 @@ const Category = ({
   handleRemoveTable,
   tableIndex,
   handleRowUpdate,
+  tablesColorClass,
 }) => {
   const [rowsData, setRowsData] = useState([]);
   const [isLocked, setIsLocked] = useState(false);
+
   useEffect(() => {
     setRowsData(data.rows);
     setIsLocked(data.isLocked);
@@ -51,7 +53,7 @@ const Category = ({
 
   return (
     <div className={`${Style.category_box}`}>
-      <div className={Style.title}>
+      <div className={`${tablesColorClass} ${Style.title}`}>
         <span>{data.title}</span>
         {!isLocked ? (
           <button onClick={(el) => handleRemoveTable(el, tableIndex)}>X</button>

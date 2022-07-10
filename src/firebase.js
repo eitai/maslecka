@@ -111,6 +111,56 @@ const getUserTableDataByTimestamp = async (uid, timestamp) => {
   }
 };
 
+const getUserIncomeTableDataByTimestamp = async (uid, timestamp) => {
+  console.log('get user data run firebase');
+  const userDocRef = db
+    .collection(`incomeTables/${uid}/timestamp`)
+    .doc(`${timestamp}`);
+
+  const userSnapShot = await getDoc(userDocRef);
+  if (!userSnapShot.exists()) {
+    const currentDateMoment = moment().format('M:YYYY');
+    const newDate = currentDateMoment.split(':').join('');
+    let currentTimeStamp = timestamp ? timestamp : newDate;
+    await saveNewTimeStamp(uid, currentTimeStamp);
+    setTimeout(() => {
+      getUserTableDataByTimestamp(uid, currentTimeStamp);
+    }, 1000);
+  } else {
+    const userdata = await getDoc(userDocRef).then((timestampData) => {
+      const data = timestampData.data();
+
+      return data;
+    });
+
+    return userdata;
+  }
+};
+
+const saveIncomeTablesNewTimeStamp = async (uid, timestamp, updatedTable) => {
+  const userDocRef = db
+    .collection(`incomeTables/${uid}/timestamp`)
+    .doc(`${timestamp}`);
+
+  const userSnapShot = await getDoc(userDocRef);
+
+  if (!userSnapShot.exists()) {
+    const mockdata = {};
+    mockdata.timestamp = UserMock;
+    try {
+      await setDoc(userDocRef, mockdata);
+    } catch (e) {}
+  } else {
+    const tableUpdatedData = {};
+    tableUpdatedData.timestamp = updatedTable;
+    try {
+      await updateDoc(userDocRef, tableUpdatedData);
+    } catch (e) {}
+  }
+
+  return userDocRef;
+};
+
 export {
   getUserTableDataByTimestamp,
   saveNewTimeStamp,
@@ -123,4 +173,6 @@ export {
   createUserDocumentFromAuth,
   setLastLogin,
   signInUserWithEmailAndPassword,
+  getUserIncomeTableDataByTimestamp,
+  saveIncomeTablesNewTimeStamp,
 };
