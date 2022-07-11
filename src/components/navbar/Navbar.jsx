@@ -22,7 +22,7 @@ const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
   };
   return (
     <div
-      className={`${isBackgroundColorOn && Style.background} ${
+      className={`${isBackgroundColorOn ? Style.background : ''} ${
         Style.container
       }`}
     >
@@ -57,7 +57,7 @@ const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
           כתבות
         </NavLink>
         <NavLink to='/save-now' onClick={handleStyleEffects}>
-          חסכו עכשיו
+          מכרז חסכון
         </NavLink>
         <NavLink to='/contact-us' onClick={handleStyleEffects}>
           צור קשר
@@ -66,7 +66,7 @@ const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
 
       <NavLink to='/'>
         <img
-          src={require('../../assets/logo.png')}
+          src={require('../../assets/logo.webp')}
           alt='logo'
           className={Style.logo}
         />

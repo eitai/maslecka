@@ -44,16 +44,17 @@ button {
   align-items: center;
   border-radius: 5px;
   cursor: pointer;
+  .muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: unset;
+    border-radius: unset;
+    border-style: unset;
+    border-width: unset;
+  }
+
+  .muirtl-1in441m {
+    color: transparent;
+  }
 }
 
-// .MuiFormControl-root {
-//   .MuiFormLabel-colorPrimary {
-//     color: #fff;
-//   }
-//   .muirtl-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-//     color: transparent;
-//   }
-//   .MuiFormLabel-filled {
-//     color: transparent;
-//   }
-// }
+// MuiOutlinedInput-notchedOutline muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline
+// MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled muirtl-1sumxir-MuiFormLabel-root-MuiInputLabel-root

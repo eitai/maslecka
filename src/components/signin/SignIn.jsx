@@ -84,7 +84,7 @@ const SignIn = ({ closeForm, setIsSignIn, open }) => {
         </button> */}
       </div>
       <img
-        src={require('../../../src/assets/businessman_PNG6572.png')}
+        src={require('../../../src/assets/businessman_PNG6572.webp')}
         alt=''
         className={Style.img_happy}
       />

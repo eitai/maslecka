@@ -53,6 +53,7 @@ const BarsChart = ({ tablesData }) => {
         font: {
           size: 20,
         },
+        padding: 20,
       },
       legend: {
         display: false,

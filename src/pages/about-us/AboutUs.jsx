@@ -38,7 +38,7 @@ const AboutUs = () => {
             </div>
             <div className={`${Style.img_box} ${Style.section}`}>
               <img
-                src={require('../../assets/animatemoney.png')}
+                src={require('../../assets/animatemoney.webp')}
                 alt='25d Png vectors by Lovepik.com'
                 className={Style.img}
               />

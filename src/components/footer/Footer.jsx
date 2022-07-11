@@ -33,7 +33,7 @@ const Footer = () => {
       </div>
       <div className={`${Style.footer_details}`}>
         <img
-          src={require('../../assets/logo.png')}
+          src={require('../../assets/logo.webp')}
           alt='logo'
           className={Style.logo}
         />

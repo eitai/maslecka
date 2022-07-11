@@ -13,7 +13,6 @@ const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const validationSchema = yup.object().shape({
-  // fullname: yup.string("נא להכניס שם מלא").required("נא להכניס שם מלא"),
   email: yup.string().email('נא להכניס אימייל').required('יש למלא אימייל'),
   phone: yup
     .string()
@@ -34,21 +33,7 @@ const ContactUs = () => {
   const [textArea, setTextArea] = useState('');
   const [fullName, setFullName] = useState('');
 
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    textArea: '',
-  });
-
   const form = useRef();
-
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   const name = e.target.name;
-  //   debugger;
-  //   setValues({ ...values, [name]: value });
-  // };
 
   const {
     register,
@@ -171,7 +156,7 @@ const ContactUs = () => {
               <span className={Style.img_title}> בחרתם ב - </span>
               <span className={Style.img_subtitle}> {subject}</span>
               <img
-                src={require(`../../assets/contactus${mainImg}.jpg`)}
+                src={require(`../../assets/contactus${mainImg}.webp`)}
                 alt='logo'
                 className={Style.img}
               />
@@ -192,7 +177,7 @@ const ContactUs = () => {
             >
               <span className={Style.box_text}>ביטוח</span>
               <img
-                src={require('../../assets/contactus1.jpg')}
+                src={require('../../assets/contactus1.webp')}
                 alt='logo'
                 className={Style.img}
               />
@@ -203,7 +188,7 @@ const ContactUs = () => {
             >
               <span className={Style.box_text}>ביטוח</span>
               <img
-                src={require('../../assets/contactus2.jpg')}
+                src={require('../../assets/contactus2.webp')}
                 alt='logo'
                 className={Style.img}
               />
@@ -214,7 +199,7 @@ const ContactUs = () => {
             >
               <span className={Style.box_text}>חיסכון</span>
               <img
-                src={require('../../assets/contactus3.jpg')}
+                src={require('../../assets/contactus3.webp')}
                 alt='logo'
                 className={Style.img}
               />
@@ -225,7 +210,7 @@ const ContactUs = () => {
             >
               <span className={Style.box_text}>פנסיה</span>
               <img
-                src={require('../../assets/contactus4.jpg')}
+                src={require('../../assets/contactus4.webp')}
                 alt='logo'
                 className={Style.img}
               />

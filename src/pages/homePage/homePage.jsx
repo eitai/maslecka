@@ -74,7 +74,7 @@ const HomePage = () => {
         className={` ${Style.btn_maslecka_container} ${Style.btn_container}`}
       >
         <Link className={Style.btn_tomaslecka} to='/dashboard'>
-          מעבר למסלקה{' '}
+          כניסה למערכת{' '}
         </Link>
       </div>
     );
@@ -95,9 +95,14 @@ const HomePage = () => {
         </div>
         <div className={Style.img_container}>
           <img
-            src={require('../../assets/holdinghands.jpg')}
+            src={require('../../assets/demos.webp')}
             alt='holdinghands'
             className={Style.img}
+          />
+          <img
+            src={require('../../assets/shakhandman.png')}
+            alt='holdinghands'
+            className={Style.img_shakehand}
           />
         </div>
         <div className={Style.title_learn_container}>

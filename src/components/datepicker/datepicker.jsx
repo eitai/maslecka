@@ -6,7 +6,6 @@ const MuiDatepicker = ({ selectedDate, handleDateChange }) => {
   return (
     <Stack spacing={4} sx={{ width: '180px' }}>
       <DatePicker
-        label={'בחרו תאריך'}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -18,7 +17,6 @@ const MuiDatepicker = ({ selectedDate, handleDateChange }) => {
             }}
             inputProps={{
               ...params.inputProps,
-              placeholder: 'בחרו תאריך',
             }}
           />
         )}

@@ -26,7 +26,7 @@
 
   position: relative;
   width: 30rem;
-  margin: 6rem auto;
+  margin: 3rem auto;
 }
 .btn_reg {
   margin-left: 2rem;
@@ -56,12 +56,13 @@
 }
 
 .img {
-  width: 55rem;
+  width: 65rem;
   height: 33rem;
   margin: -11rem auto 0 auto;
   display: block;
   border-radius: 10px;
   box-shadow: var(--box-shadow-hard);
+  object-fit: cover;
 }
 .title_learn_container {
   display: flex;
@@ -137,12 +138,12 @@
   border-radius: 5px;
   &_1 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
-      url('../../assets/coins.jpg');
+      url('../../assets/coins.webp');
     background-size: cover;
   }
   &_2 {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
-      url('../../assets/officedesk.jpg');
+      url('../../assets/officedesk.webp');
 
     background-size: cover;
   }
@@ -241,4 +242,13 @@
   100% {
     background-position: 200% 50%;
   }
+}
+
+.img_container {
+  position: relative;
+}
+.img_shakehand {
+  position: absolute;
+  top: 9.2rem;
+  left: 38rem;
 }
