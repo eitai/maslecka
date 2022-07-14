@@ -24,7 +24,6 @@ const validationSchema = yup.object().shape({
 const inputStyle = {
   width: '100%',
   mb: 3,
-  border: '1px solid black',
   borderRadius: '5px',
 };
 
@@ -36,6 +35,7 @@ const SaveNow = () => {
   const [fullName, setFullName] = useState('');
 
   const form = useRef();
+  const form2 = useRef();
 
   const {
     register,
@@ -43,34 +43,45 @@ const SaveNow = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
 
-  const sendEmail = (details) => {
-    emailjs
-      .sendForm(
-        'service_ox95csn',
-        'template_dp8qooa',
-        form.current,
-        '5epS-073bMFzUrthm'
-      )
-      .then(
-        (result) => {
-          // console.log(result.text);
-        },
-        (error) => {
-          // console.log(error.text);
-        }
-      );
+  const sendNewEmail = () => {
+    const subjectsToString = subjects.join(', ');
+
+    const data = {
+      service_id: 'service_ox95csn',
+      template_id: 'template_dp8qooa',
+      user_id: '5epS-073bMFzUrthm',
+      template_params: {
+        username: fullName,
+        phone: phone,
+        textArea: textArea,
+        subjects: subjectsToString,
+        email: email,
+      },
+    };
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(
+      (result) => {},
+      (error) => {}
+    );
   };
 
   const handleFormSubmit = (e) => {
+    const subjectsToString = subjects.join(', ');
+
     const userMessage = {
-      fullName: e.fullname,
+      fullname: e.fullname,
       email: e.email,
       phone: e.phone,
       textArea: textArea,
-      subject: subjects,
+      subjects: subjectsToString,
     };
-    debugger;
-    sendEmail(userMessage);
+    sendNewEmail(userMessage);
   };
 
   const handleChosenSubjects = (subject) => {
@@ -84,24 +95,23 @@ const SaveNow = () => {
       setSubjects([...newSubjects]);
     }
   };
-  console.log(subjects);
   return (
     <div>
       <Navbar isBackgroundColorOn={true} />
       <div className={Style.main_container}>
-        <div className={Style.title_container}>
-          <h2 className={Style.title}>
-            השאירו פרטים ואנחנו נדאג
-            <span> </span>
-            <span className={Style.title_part}>שתתחילו לחסוך:</span>
-          </h2>
-        </div>
         <div className={`container ${Style.container}`}>
           <form
             ref={form}
-            className={Style.form}
+            className={`savenow-mui-override ${Style.form}`}
             onSubmit={handleSubmit(handleFormSubmit)}
           >
+            <div className={Style.title_container}>
+              <h2 className={Style.title}>
+                השאירו פרטים ואנחנו נדאג
+                <span> </span>
+                <span className={Style.title_part}>שתתחילו לחסוך:</span>
+              </h2>
+            </div>
             <TextField
               error={errors?.fullname}
               label='שם מלא'
@@ -141,80 +151,92 @@ const SaveNow = () => {
               onChange={(e) => setPhone(e.target.value)}
               value={phone}
             />
-            <TextareaAutosize
-              maxRows={4}
-              aria-label='maximum height'
-              placeholder='שתפו אותנו'
-              name='textArea'
-              sx={inputStyle}
-              style={{
-                width: '25rem',
-                border: '1px solid black',
-                height: 70,
-                display: 'block',
-                marginBottom: '15px',
-                color: 'rgba(0, 0, 0, 1)',
-                paddingRight: '10px',
-              }}
-              onChange={(e) => setTextArea(e.target.value)}
-              value={textArea}
-            />
+            <div className={Style.testArea_container}>
+              <TextareaAutosize
+                maxRows={4}
+                aria-label='maximum height'
+                placeholder='שתפו אותנו'
+                name='textArea'
+                sx={inputStyle}
+                style={{
+                  width: '100%',
+                  border: '2px solid #444295',
+                  height: 70,
+                  display: 'block',
+                  marginBottom: '15px',
+                  color: 'black',
+                  paddingRight: '10px',
+                }}
+                onChange={(e) => setTextArea(e.target.value)}
+                value={textArea}
+              />
+            </div>
             <input type='submit' value='שלח' className={Style.btn_signup} />
           </form>
           <div className={Style.img_container}>
             <span className={Style.img_title}>בחרו נושאי פנייה</span>
-            <div className={`save-now-mui ${Style.checkboxes}`}>
+            <form className={`save-now-mui ${Style.checkboxes}`} ref={form2}>
               <FormControlLabel
                 control={<Checkbox />}
                 label='ביטוחים ופיננסים'
                 onChange={(e) => handleChosenSubjects('ביטוחים ופיננסים')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='דיור'
                 onChange={(e) => handleChosenSubjects('דיור')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='תקשורת'
                 onChange={(e) => handleChosenSubjects('תקשורת')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='מזון וקניות'
                 onChange={(e) => handleChosenSubjects('מזון וקניות')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='טיפוח'
                 onChange={(e) => handleChosenSubjects('טיפוח')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='ביגוד'
                 onChange={(e) => handleChosenSubjects('ביגוד')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='ביטוח'
                 onChange={(e) => handleChosenSubjects('ביטוח')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='רכב ונסיעות'
                 onChange={(e) => handleChosenSubjects('רכב ונסיעות')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='ילדים וחינוך'
                 onChange={(e) => handleChosenSubjects('ילדים וחינוך')}
+                name='checkbox'
               />
               <FormControlLabel
                 control={<Checkbox />}
                 label='בריאות'
                 onChange={(e) => handleChosenSubjects('בריאות')}
+                name='checkbox'
               />
-            </div>
+            </form>
           </div>
         </div>
       </div>

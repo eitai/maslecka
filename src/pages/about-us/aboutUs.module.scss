@@ -20,6 +20,9 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 .section {
   width: 50%;
@@ -28,6 +31,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
 .section_text {
   width: 50%;
@@ -36,16 +42,27 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media only screen and (max-width: 600px) {
+    width: unset;
+    padding: 1rem;
+  }
 }
 .img {
   transform: scaleX(-1);
   height: 90%;
   width: 100%;
+  @media only screen and (max-width: 600px) {
+    height: 90%;
+    width: 100%;
+  }
 }
 .section_title {
   margin-top: 4rem;
   font-size: 25px;
   margin-bottom: 1rem;
+  @media only screen and (max-width: 600px) {
+    margin-top: 1rem;
+  }
 }
 .img_box {
   display: flex;

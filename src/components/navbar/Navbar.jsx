@@ -2,7 +2,7 @@ import React from 'react';
 import Style from './navbar.module.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import MobileSideBar from './mobileSideBar/MobileSideBar';
 import { signOutUser } from '../../firebase';
 
 const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
@@ -63,7 +63,9 @@ const Navbar = ({ handleAuthForm, isBackgroundColorOn }) => {
           צור קשר
         </NavLink>
       </div>
-
+      <div className={Style.drawer}>
+        <MobileSideBar />
+      </div>
       <NavLink to='/'>
         <img
           src={require('../../assets/logo.webp')}
