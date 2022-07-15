@@ -46,6 +46,7 @@ const BarsChart = ({ tablesData }) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -76,7 +77,18 @@ const BarsChart = ({ tablesData }) => {
       },
     },
   };
-  return <div>{tablesData && <Bar options={options} data={data} />}</div>;
+  return (
+    <div className='chart-container'>
+      {tablesData && (
+        <Bar
+          options={options}
+          data={data}
+          responsive
+          maintainAspectRatio='false'
+        />
+      )}
+    </div>
+  );
 };
 
 export default BarsChart;
