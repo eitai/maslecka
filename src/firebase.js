@@ -86,7 +86,6 @@ const saveNewTimeStamp = async (uid, timestamp, updatedTable) => {
 };
 
 const getUserTableDataByTimestamp = async (uid, timestamp) => {
-  console.log('get user data run firebase');
   const userDocRef = db
     .collection(`tables/${uid}/timestamp`)
     .doc(`${timestamp}`);
@@ -148,17 +147,13 @@ const saveIncomeTablesNewTimeStamp = async (uid, timestamp, updatedTable) => {
     mockdata.timestamp = incomeMock;
     try {
       await setDoc(userDocRef, mockdata);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   } else {
     const tableUpdatedData = {};
     tableUpdatedData.timestamp = updatedTable;
     try {
       await updateDoc(userDocRef, tableUpdatedData);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 
   return userDocRef;

@@ -4,7 +4,6 @@ import { auth, onAuthStateChanged } from '../../firebase';
 
 const RequireAuth = ({ children, isLoggedIn }) => {
   const [isLoading, setIsLoading] = useState(true);
-  console.log(isLoggedIn);
 
   async function verify() {
     await onAuthStateChanged(auth, (userAuth) => {

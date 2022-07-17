@@ -38,7 +38,7 @@ const SignUp = ({ closeForm, setIsSignIn }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema) });
-  console.log(errors);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -163,7 +163,7 @@ const SignUp = ({ closeForm, setIsSignIn }) => {
 
       <div className={Style.signin_container}>
         <span className={Style.text}>כבר רשום במערכת?</span>
-        <button className={Style.signin_btn} onClick={() => setIsSignIn(true)}>
+        <button className={Style.toSignin} onClick={() => setIsSignIn(true)}>
           התחבר
         </button>
       </div>

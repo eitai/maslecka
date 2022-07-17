@@ -31,7 +31,6 @@ const IncomeCharts = ({ selectedTimeStamp, setIncomeObj }) => {
       // debugger;
       if (data !== undefined) setLoading(false);
 
-      console.log(data);
       setIncomeTables(data?.timestamp);
     }
     fetchData();
@@ -96,6 +95,7 @@ const IncomeCharts = ({ selectedTimeStamp, setIncomeObj }) => {
                 tableIndex={index}
                 handleRowUpdate={handleRowUpdate}
                 tablesColorClass={Style.tableColor}
+                isIncome={true}
               />
             </div>
           );

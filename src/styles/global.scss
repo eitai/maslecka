@@ -39,6 +39,7 @@ button {
   border-bottom: 2px solid rgb(16, 159, 255);
 }
 .chart-container {
+  height: 20rem;
   @media only screen and (max-width: 600px) {
     padding: 0;
     width: 100%;

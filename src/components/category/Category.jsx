@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
+import { AiOutlineHome, AiFillCar } from 'react-icons/ai';
+
+import {
+  GiShoppingCart,
+  GiFemaleLegs,
+  GiClothes,
+  GiHealingShield,
+} from 'react-icons/gi';
+import { TbMoodKid } from 'react-icons/tb';
+import { MdSportsBasketball } from 'react-icons/md';
+import { FaCoins, FaSatelliteDish } from 'react-icons/fa';
+import { FcBusinessman, FcBusinesswoman } from 'react-icons/fc';
 
 const Category = ({
   data,
@@ -9,10 +21,25 @@ const Category = ({
   tableIndex,
   handleRowUpdate,
   tablesColorClass,
+  isIncome,
 }) => {
   const [rowsData, setRowsData] = useState([]);
   const [isLocked, setIsLocked] = useState(false);
-
+  const IncomeIcons = [FcBusinessman, FcBusinesswoman];
+  const IncomeIcon = IncomeIcons[tableIndex];
+  const Icons = [
+    AiOutlineHome,
+    FaSatelliteDish,
+    GiShoppingCart,
+    GiFemaleLegs,
+    GiClothes,
+    AiFillCar,
+    TbMoodKid,
+    MdSportsBasketball,
+    GiHealingShield,
+    FaCoins,
+  ];
+  const Icon = Icons[tableIndex];
   useEffect(() => {
     setRowsData(data.rows);
     setIsLocked(data.isLocked);
@@ -54,7 +81,12 @@ const Category = ({
   return (
     <div className={`${Style.category_box}`}>
       <div className={`${tablesColorClass} ${Style.title}`}>
-        <span>{data.title}</span>
+        <div>
+          {' '}
+          <span>{data.title} </span>
+          {isLocked && !isIncome && <Icon />}
+          {isLocked && isIncome && <IncomeIcon />}
+        </div>
         {!isLocked ? (
           <button onClick={(el) => handleRemoveTable(el, tableIndex)}>X</button>
         ) : (

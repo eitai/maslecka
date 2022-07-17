@@ -4,15 +4,12 @@ import { UserMock } from './dashboard/userMock';
 import { saveNewTimeStamp, getUserTableDataByTimestamp } from '../firebase';
 const Test = () => {
   const UserId = useSelector((state) => state.user.user.uid);
-  console.log(UserId);
 
   const handleSetDataToDB = () => {
     saveNewTimeStamp(UserId, UserMock, 1632132234200);
   };
   const handleGetDataFromDB = () => {
-    getUserTableDataByTimestamp(UserId, 16321324234200).then((data) => {
-      console.log(data);
-    });
+    getUserTableDataByTimestamp(UserId, 16321324234200).then((data) => {});
   };
 
   return (
