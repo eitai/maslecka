@@ -1,0 +1,64 @@
+.container {
+  position: absolute;
+  width: 40rem;
+  height: 20rem;
+  background-color: #fff;
+  right: 350px;
+  top: 87px;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-soft);
+  z-index: 999;
+  padding: 1rem;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    height: 100%;
+    padding-top: 3rem;
+    right: 0px;
+    top: 0px;
+  }
+  .title {
+    font-size: 1.5rem;
+    background-color: var(--orangeColor);
+    padding: 3px 10px;
+    box-shadow: var(--box-shadow-soft);
+    border-radius: 5px;
+    display: block;
+  }
+}
+.label {
+  display: block;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.phone_input {
+  box-shadow: var(--box-shadow-soft);
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+}
+.closemodalbtn {
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+.addphone_btn {
+  display: block;
+  text-align: center;
+  background-color: var(--purpleColor);
+  padding: 0.7rem 8rem;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-soft);
+  margin-top: 2rem;
+}
+.addphone_btn_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-direction: column;
+}

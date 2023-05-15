@@ -1,0 +1,134 @@
+.box {
+  box-shadow: var(--box-shadow-soft);
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 60%;
+  background-color: rgba(54, 162, 235, 0.2);
+  padding: 2rem;
+  @media only screen and (max-width: 600px) {
+    position: relative;
+    top: unset;
+    left: unset;
+    height: unset;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    transform: unset;
+  }
+  @media only screen and (min-width: 1200px) {
+    box-shadow: var(--box-shadow-soft);
+    top: 42.5%;
+    left: 50%;
+    width: 68%;
+    height: 65%;
+  }
+}
+.title {
+  font-size: 50px;
+  color: rgb(110, 9, 140);
+  font-weight: bold;
+  @media only screen and (max-width: 600px) {
+    font-size: 35px;
+  }
+}
+.oldprice {
+  font-size: 30px;
+  text-decoration: line-through;
+  @media only screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+}
+.newprice {
+  font-size: 30px;
+  @media only screen and (max-width: 600px) {
+    font-size: 25px;
+  }
+}
+.newprice_numb {
+  font-size: 50px;
+  color: var(--orangeColor);
+  @media only screen and (max-width: 600px) {
+    font-size: 30px;
+  }
+}
+
+.text {
+  display: flex;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
+}
+.form_container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+.form_box {
+  width: 60%;
+  margin-top: 1rem;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+.img_container {
+  width: 37rem;
+  margin-top: -6rem;
+
+  @media only screen and (max-width: 600px) {
+    width: 18.5rem;
+    margin-top: unset;
+  }
+}
+.closebtn_mobile {
+  margin: 7px;
+  @media only screen and (max-width: 600px) {
+    display: block;
+  }
+}
+.img {
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-soft);
+  @media only screen and (min-width: 1200px) {
+    width: 35rem;
+  }
+}
+.small_title {
+  font-size: 20px;
+}
+.btn {
+  color: #fff;
+  background-color: var(--orangeColor);
+  width: 30%;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: var(--box-shadow-soft);
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+.file_input {
+  margin-bottom: 20px;
+}
+
+.always_wanted {
+  font-size: 20px;
+}
+
+.possible {
+  font-size: 25px;
+  color: var(--orangeColor);
+}
+.terms {
+  color: rgb(2, 92, 117);
+  text-decoration: underline;
+  font-size: 20px;
+  display: inline-block;
+}

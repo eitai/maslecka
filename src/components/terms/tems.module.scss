@@ -1,0 +1,17 @@
+.container {
+  position: absolute;
+  background-color: #fff;
+  z-index: 99;
+  box-shadow: var(--box-shadow-soft);
+  padding: 1rem;
+  border-radius: 10px;
+  height: 25rem;
+  overflow-y: scroll;
+  width: 27rem;
+}
+.closebtn {
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  cursor: pointer;
+}

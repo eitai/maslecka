@@ -1,0 +1,97 @@
+.container {
+  position: absolute;
+  background-color: #fff;
+  width: 40rem;
+  height: 22rem;
+  box-shadow: 0 1px 4px #ffffff;
+  border-radius: 10px;
+  top: 81px;
+  right: 265px;
+  z-index: 9999;
+  color: #000;
+  @media only screen and (max-width: 600px) {
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+  }
+}
+.title {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  font-size: 24px;
+  text-decoration: underline;
+  color: var(--orangeColor);
+  margin-top: -30px;
+}
+.close_btn {
+  color: #000;
+  margin-right: 15px;
+  font-size: 2rem;
+}
+
+.changes_container {
+  padding: 1rem;
+  color: #000;
+  font-size: 1.6rem;
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+.clickhere_btn {
+  margin-right: 20px;
+  color: rgb(24, 96, 132);
+  text-decoration: underline;
+  font-size: 1.2rem;
+}
+.btn {
+  margin-bottom: 20px;
+}
+.namechange_container {
+  border-left: 1px solid #7777;
+  padding-left: 2rem;
+  width: 50%;
+  @media only screen and (max-width: 600px) {
+    border-left: unset;
+    border-bottom: 1px solid #7777;
+    padding-bottom: 2rem;
+  }
+}
+.btn_accept {
+  background-color: rgb(27, 2, 95);
+  border-radius: 10px;
+  width: 100%;
+}
+.btn_contrainer {
+  text-align: center;
+  color: #fff;
+}
+.error_text {
+  color: var(--orangeColor);
+}
+.password_change {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+}
+.password {
+  white-space: normal;
+}
+.btn_pass {
+  margin-top: 20px;
+}
+
+.delete_checkbox {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 3px;
+  margin-top: 1rem;
+}
+.delete_container {
+  display: flex;
+  flex-direction: column;
+}

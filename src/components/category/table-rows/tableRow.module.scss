@@ -1,0 +1,24 @@
+.dropdown {
+  width: 7rem;
+  background: #fff;
+  @media only screen and (max-width: 600px) {
+    width: 5.8rem;
+    font-size: 0.8rem !important;
+    height: 0.8rem !important;
+  }
+}
+.btn_disable {
+  color: rgba(57, 56, 56, 0.339) !important;
+  cursor: pointer;
+  border-color: rgba(57, 56, 56, 0.339) !important;
+  &:hover {
+    background-color: unset !important;
+  }
+}
+.form_control {
+  @media only screen and (max-width: 600px) {
+    padding: 0.4rem 0.1rem !important;
+    height: 2.3rem;
+    font-size: 0.8rem !important;
+  }
+}

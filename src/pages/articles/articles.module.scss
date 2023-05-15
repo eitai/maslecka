@@ -1,0 +1,45 @@
+.box {
+  width: 70%;
+  margin: 2rem auto;
+  box-shadow: var(--box-shadow-soft);
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 18rem;
+  span {
+    font-size: 30px;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 98%;
+  }
+}
+
+.container {
+  background-color: rgba(54, 162, 235, 0.2);
+  padding: 0.5rem;
+}
+
+.title {
+  text-align: center;
+  color: var(--orangeColor);
+  text-decoration: underline;
+}
+.text {
+  margin: 7px;
+}
+
+.img {
+  float: right;
+  margin-left: 1rem;
+  width: 19.5rem;
+}
+
+.openArticle {
+  height: 100%;
+}
+.btnOpen {
+  margin-right: 1rem;
+  text-decoration: underline;
+  color: rgb(21, 77, 149);
+}

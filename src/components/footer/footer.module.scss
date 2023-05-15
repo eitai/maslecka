@@ -1,0 +1,134 @@
+.container {
+  direction: rtl;
+  overflow: hidden;
+  @media only screen and (max-width: 600px) {
+    height: unset;
+  }
+}
+
+.line {
+  background: var(--purpleColor);
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1rem;
+  color: #fff;
+  @media only screen and (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+}
+
+.footer_details {
+  background: #333;
+
+  display: flex;
+  @media only screen and (max-width: 600px) {
+    height: unset;
+  }
+}
+
+.icons {
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 2rem;
+  @media only screen and (max-width: 900px) {
+    width: 30%;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+
+.text {
+  font-size: 2rem;
+  @media only screen and (max-width: 900px) {
+    font-size: 1.5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+}
+
+.logo {
+  width: 10rem;
+  height: 7rem;
+  margin-top: 1rem;
+  @media only screen and (max-width: 1200px) {
+    margin-right: unset;
+  }
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
+.texts_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+.text_container {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+  margin-right: 10rem;
+  @media only screen and (max-width: 1200px) {
+    margin-right: 4rem;
+  }
+  @media only screen and (max-width: 900px) {
+    margin-right: 2rem;
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
+  @media only screen and (max-width: 600px) {
+    margin-right: unset;
+    padding: unset;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+
+  @media only screen and (max-width: 1200px) {
+    margin-top: 1rem;
+  }
+
+  @media only screen and (max-width: 650px) {
+    font-size: 1rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.5rem;
+  }
+}
+
+.btn_small {
+  margin-bottom: 0.8rem;
+}
+
+.icon_footer {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+.text_contact {
+  text-align: right;
+  @media only screen and (max-width: 600px) {
+    text-align: center;
+  }
+}
+.right_text {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding-top: 2rem;
+}

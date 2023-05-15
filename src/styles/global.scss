@@ -1,0 +1,135 @@
+.container {
+  width: 100%;
+  max-width: 1300px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+html {
+  direction: rtl;
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+
+  overflow-x: hidden;
+
+  @media only screen and (max-width: 1200px) {
+    // width < 1200?
+    font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+  }
+
+  @media only screen and (max-width: 900px) {
+    // width < 900?
+    font-size: 50%; //1 rem = 8px, 8/16 = 50%
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 12%; //1rem = 12, 12/16
+  }
+  @media only screen and (max-width: 600px) {
+    overflow-x: hidden;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+.navbar_bt {
+  border-bottom: 2px solid rgb(16, 159, 255);
+}
+.chart-container {
+  height: 20rem;
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+    width: 100%;
+  }
+}
+//MUI STYLES
+
+.PrivatePickersYear-root {
+  text-align: center;
+}
+.MuiOutlinedInput-root {
+  .muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    // border: unset;
+    cursor: pointer;
+  }
+}
+.muirtl-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  color: #fff;
+  cursor: pointer;
+}
+
+.datepicker_container {
+  background-color: rgba(54, 162, 235, 0.8);
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  @media only screen and (max-width: 600px) {
+    width: 9rem;
+  }
+  .muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: unset;
+    border-radius: unset;
+    border-style: unset;
+    border-width: unset;
+  }
+
+  .muirtl-1in441m {
+    color: transparent;
+  }
+}
+
+.save-now-mui {
+  .MuiFormControlLabel-label {
+    font-size: 23px;
+    color: rgb(27, 55, 41);
+  }
+}
+
+.savenow-mui-override {
+  .muirtl-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    border-color: #000;
+  }
+
+  .muirtl-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: 2px solid var(--purpleColor);
+    &:hover {
+      border: 2px solid var(--purpleColor);
+    }
+    &:focus {
+      border-color: var(--purpleColor);
+    }
+  }
+
+  .muirtl-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    border-color: var(--purpleColor);
+
+    &:hover {
+    }
+  }
+  .MuiInputBase-colorPrimary {
+    &:hover {
+      border-color: var(--purpleColor);
+    }
+  }
+  .muirtl-9ddj71-MuiInputBase-root-MuiOutlinedInput-root:hover
+    .MuiOutlinedInput-notchedOutline {
+    border-color: var(--purpleColor) !important;
+  }
+
+  .muirtl-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    border-color: var(--purpleColor) !important;
+  }
+  .muirtl-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+    color: #000;
+    font-size: 20px;
+  }
+  .muirtl-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input {
+    font-weight: 600;
+  }
+}

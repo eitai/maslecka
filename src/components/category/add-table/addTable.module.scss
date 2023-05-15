@@ -1,0 +1,52 @@
+.container {
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+  box-shadow: 0 3px 15px rgb(0 0 0 / 54%);
+  height: 10rem;
+  width: 20rem;
+  border-radius: 10px;
+  top: 40px;
+  display: flex;
+  padding: 0.2rem 0.8rem;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  @media only screen and (max-width: 600px) {
+    left: 1px;
+  }
+}
+
+.input {
+  box-shadow: var(--box-shadow-soft);
+  padding: 0.5rem;
+
+  font-size: 0.8rem;
+  width: 80%;
+  border: 1px solid #7777;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.btn {
+  background-color: var(--purpleColor);
+  width: 9rem;
+  height: 2rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow-soft);
+}
+
+.btn_container {
+  text-align: left;
+}
+
+.closemodal {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 1.3rem;
+}
