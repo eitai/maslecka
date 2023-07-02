@@ -1,6 +1,6 @@
 export const incomeMock = [
   {
-    title: 'חסכונות והכנסות א',
+    title: 'הכנסות משק בית',
     isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'שכר', amount: 0 },
@@ -11,7 +11,7 @@ export const incomeMock = [
     ],
   },
   {
-    title: 'חסכונות והכנסות ב',
+    title: 'פיננסים חסכונות והשקעות משק בית',
     isLocked: true,
     rows: [
       { expense: 'קבוע', kind: 'שכר', amount: 0 },

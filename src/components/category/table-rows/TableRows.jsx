@@ -12,7 +12,7 @@ const customStyles = {
 
 const TableRows = ({ rowsData, deleteTableRows, handleChange, isLocked }) => {
   return rowsData.map((data, index) => {
-    const { kind, amount } = data;
+    const { kind, amount, id } = data;
 
     const dropdownData = [
       { value: 'expense', label: 'קבוע' },
@@ -20,7 +20,7 @@ const TableRows = ({ rowsData, deleteTableRows, handleChange, isLocked }) => {
     ];
 
     return (
-      <tr key={index}>
+      <tr key={id || index}>
         <td>
           <Select
             defaultValue={dropdownData[0]}

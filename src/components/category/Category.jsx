@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import TableRows from './table-rows/TableRows';
 import Style from './category.module.scss';
 import { AiOutlineHome, AiFillCar } from 'react-icons/ai';
-
+import { v4 as uuidv4 } from 'uuid';
 import {
   GiShoppingCart,
   GiFemaleLegs,
@@ -50,9 +50,14 @@ const Category = ({
       expense: '',
       kind: '',
       amount: '',
+      id: uuidv4(),
     };
-    setRowsData([...rowsData, rowsInput]);
+    const updatedRowData = [...rowsData];
+    updatedRowData.unshift(rowsInput);
+
+    setRowsData(updatedRowData);
   };
+
   const deleteTableRows = (index) => {
     const rows = [...rowsData];
     rows.splice(index, 1);
@@ -71,7 +76,6 @@ const Category = ({
         setRowsData(rowsInput);
       } else {
         const { value, label } = event;
-        // const intValue = parseInt(value);
         const rowsInput = [...rowsData];
         rowsInput[index][value] = label;
         setRowsData(rowsInput);

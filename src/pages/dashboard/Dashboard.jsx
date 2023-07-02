@@ -7,7 +7,7 @@ import DonatChat from '../../components/charts/donut-chart/DonutChart';
 import { v4 as uuid } from 'uuid';
 import MuiDatepicker from '../../components/datepicker/datepicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { he } from 'date-fns/locale';
 import { saveNewTimeStamp, getUserTableDataByTimestamp } from '../../firebase';
 import { useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import moment from 'moment';
 import { isNumber, toNumber } from 'lodash';
 import IncomeCharts from '../../components/incomeCharts/IncomeCharts';
 import Footer from '../../components/footer/Footer';
+
 const Dashboard = () => {
   const [tables, setTables] = useState([]);
   const [openAddTableModal, setOpenAddTableModal] = useState(false);
@@ -29,6 +30,7 @@ const Dashboard = () => {
     totalMan: '',
     total: '',
   });
+
   useEffect(() => {
     const currentDateMoment = moment().format('M:YYYY');
     const newDate = currentDateMoment.split(':').join('');
@@ -125,7 +127,7 @@ const Dashboard = () => {
 
   const handleAddTable = (value) => {
     const newTables = [...tables];
-    newTables.push({
+    newTables.shift({
       id: uuid(),
       title: value,
       rows: [{ expense: '', kind: '', amount: '' }],
@@ -205,7 +207,7 @@ const Dashboard = () => {
               <div className={Style.total_container}>
                 <div className={Style.total}>
                   <div>
-                    <span>הכנסות גבר</span>:<span> </span>
+                    <span> הכנסות משק בית</span>:<span> </span>
                   </div>
                   <div>
                     {' '}
@@ -215,7 +217,7 @@ const Dashboard = () => {
                 </div>
                 <div className={Style.total}>
                   <div>
-                    <span> הכנסות אישה</span>:<span> </span>
+                    <span> פיננסים חסכונות והשקעות משק בית</span>:<span> </span>
                   </div>
                   <div>
                     {' '}

@@ -77,7 +77,7 @@ const SignUp = ({ closeForm, setIsSignIn }) => {
             err.message ===
             'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'
           ) {
-            setCurrentError('משתמש קיים במערכת');
+            setCurrentError('משתמש או מייל קיימים במערכת');
             setIsError(true);
           }
         });

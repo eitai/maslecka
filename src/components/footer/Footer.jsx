@@ -1,16 +1,10 @@
-import React from 'react';
 import Style from './footer.module.scss';
 import {
   FaFacebook,
   FaFacebookMessenger,
   FaWhatsapp,
-  FaInstagram,
-  FaHome,
   FaEnvelope,
-  FaPhoneAlt,
-  FaFax,
 } from 'react-icons/fa';
-import { WhatsappShareButton } from 'react-share';
 import ReactWhatsapp from 'react-whatsapp';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +12,7 @@ const Footer = () => {
   return (
     <div className={Style.container}>
       <div className={Style.line}>
-        a a<span className={Style.text}>התחברו אלינו ברשתות החברתיות :</span>
+        <span className={Style.text}>התחברו אלינו ברשתות החברתיות :</span>
         <div className={Style.icons}>
           <a href='https://www.facebook.com/profile.php?id=100064266904737'>
             <FaFacebook />

@@ -121,6 +121,7 @@
   border-bottom: 1px solid #7777;
   border-top: 1px solid #7777;
   padding: 2rem 0;
+
   @media only screen and (max-width: 600px) {
     margin-top: 2rem;
   }
@@ -136,7 +137,7 @@
 }
 .total {
   display: flex;
-  font-size: 1.5rem;
+  font-size: 1rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;

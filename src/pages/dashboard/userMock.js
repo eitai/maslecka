@@ -5,7 +5,7 @@ export const UserMock = [
     rows: [
       { expense: 'קבוע', kind: 'שכירות', amount: '' },
       { expense: 'קבוע', kind: 'ארנונה', amount: '' },
-      { expense: 'משתנה', kind: 'מיםביוב', amount: '' },
+      { expense: 'משתנה', kind: 'מים', amount: '' },
       { expense: 'קבוע', kind: 'חשמל', amount: '' },
       { expense: 'קבוע', kind: 'גז', amount: '' },
       { expense: 'קבוע', kind: 'ועוד בית', amount: '' },

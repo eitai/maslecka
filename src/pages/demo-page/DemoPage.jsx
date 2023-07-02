@@ -199,7 +199,8 @@ const DemoPage = () => {
               <div className={Style.total_container}>
                 <div className={Style.total}>
                   <div>
-                    <span>הכנסות גבר</span>:<span> </span>
+                    הכנסות משק בית
+                    <span></span>:<span> </span>
                   </div>
                   <div>
                     {' '}
@@ -209,7 +210,8 @@ const DemoPage = () => {
                 </div>
                 <div className={Style.total}>
                   <div>
-                    <span> הכנסות אישה</span>:<span> </span>
+                    פיננסים חסכונות והשקעות משק בית
+                    <span></span>:<span> </span>
                   </div>
                   <div>
                     {' '}
